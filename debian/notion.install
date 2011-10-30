@@ -1,0 +1,5 @@
+debian/notion.desktop usr/share/xsessions
+debian/default etc
+debian/watch usr/share/notion/debian
+debian/install-notion-cfg usr/sbin
+debian/cfg_kludge_flash.lua etc/X11/notion

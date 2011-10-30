@@ -1,0 +1,3 @@
+var/lib/notion/debian-menu.lua usr/share/notion/debian-menu.lua
+var/lib/notion/debian-menu-i18n.lua usr/share/notion/debian-menu-i18n.lua
+etc/default/notion etc/X11/notion/cfg_debian.lua

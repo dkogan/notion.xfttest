@@ -32,7 +32,7 @@ submenutitle="    submenu(\"" $title "\", \"" $section "\"),\n";
 preoutput="\n";
 mainmenutitle="Debian";
 rootsection="Debian";
-rootprefix="/var/lib/ion3/";
-userprefix="/.ion3/";
+rootprefix="/var/lib/notion/";
+userprefix="/.notion/";
 
 preoutput= "-- Automatically generated file. Do not edit.\n-- (See /usr/share/doc/menu/menu.txt.gz)\n\n";

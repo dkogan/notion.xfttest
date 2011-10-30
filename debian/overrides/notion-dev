@@ -1,0 +1,2 @@
+notion-dev: script-not-executable ./usr/lib/notion/libextl/libextl-mkexports
+notion-dev: unusual-interpreter ./usr/lib/notion/libextl/libextl-mkexports #!/usr/bin/lua5.1

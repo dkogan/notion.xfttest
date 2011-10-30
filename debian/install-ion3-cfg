@@ -3,10 +3,10 @@
 set -e
 
 usage() {
-    echo >&2 "Usage: install-ion3-cfg [--remove] config-basename"
+    echo >&2 "Usage: install-notion-cfg [--remove] config-basename"
 }
 
-config_dir=/etc/X11/ion3
+config_dir=/etc/X11/notion
 config_list=$config_dir/cfg_debian_ext.lua
 
 action=add

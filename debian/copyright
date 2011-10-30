@@ -1,14 +1,15 @@
-This is the Debian-packaged version of Ion3.  It is not part of the
+This is the Debian-packaged version of Notion.  It is not part of the
 Debian system itself due to the restrictions on modifications in the
-Ion3 licence (see below).
+Ion licence (see below).
 
-The package was put together by Per Olofsson <pelle@dsv.su.se>, based
-on the ion package created by Tommi Virtanen <tv@debian.org>.  It uses
-source from:
+The package was put together by Arnout Engelen <arnouten@bzzt.net>, based
+on the work by Ben Hutchings <benh@debian.org> and Per Olofsson 
+<pelle@dsv.su.se>, which in turn was based on the ion package created by 
+Tommi Virtanen <tv@debian.org>.  It uses source from:
 
-  http://modeemi.fi/~tuomov/ion/
+  http://notion.sf.net
 
-The author of Ion3 is Tuomo Valkonen <tuomov@iki.fi>.
+The author of Notion is the Notion Team, see http://notion.sf.net
 
 --
 
@@ -19,7 +20,7 @@ the control file and notify <nonfree@release.debian.net>.
 
 ---
 
-The following notice applies to the Ion3 code and to the names "Ion",
+The following notice applies to the Notion code and to the names "Ion",
 "Ion3", etc.:
 
 Copyright (c) Tuomo Valkonen 1999-2008.
@@ -141,7 +142,7 @@ library and Scheme-in-one-defun in particular.
 
 ---
 
-The following notice applies to libtu, a library included in Ion3:
+The following notice applies to libtu, a library included in Notion:
 
 Copyright (c) Tuomo Valkonen 1999-2007.
 
@@ -163,14 +164,14 @@ version 2.1 of the License, or (at your option) any later version.
 
 ---
 
-Ion3 includes an implementation of snprintf which is licensed under
+Notion includes an implementation of snprintf which is licensed under
 the "Frontier Artistic License Version 1.0".  This code is not
 included in the Debian binary packages.  In the source package, the
 license text can be found in libtu/snprintf_2.2/LICENSE.txt.
 
 ---
 
-Ion3 includes fontset handling code based on an example by Tomohiro
+Notion includes fontset handling code based on an example by Tomohiro
 Kubota, to which the following notice applies:
 
 Copyright © 1999-2001 Tomohiro KUBOTA.
@@ -192,11 +193,11 @@ since Lukas' contributions were originally under that.
 
 ---
 
-The following notice applies to the Czech translation of Ion3:
+The following notice applies to the Czech translation of Notion:
 
 Copyright (c) Miroslav Kure 2004,2005,2006,2007.
 
-This file is distributed under the same license as the Ion3 package.
+This file is distributed under the same license as the Notion package.
 
 ---
 
@@ -212,7 +213,7 @@ option) any later version.
 
 ---
 
-The following notice applies to the document "Ion: Notes for
+The following notice applies to the document "Notion: Notes for
 the module and patch writer":
 
 Copyright © 2003-2004 Tuomo Valkonen.

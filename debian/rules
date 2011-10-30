@@ -61,20 +61,20 @@ install-arch: build-arch
 
 	$(MAKE) install \
 		PREFIX=$(CURDIR)/$(INSTDIR)/usr \
-		ETCDIR=$(CURDIR)/$(INSTDIR)/etc/X11/ion3
+		ETCDIR=$(CURDIR)/$(INSTDIR)/etc/X11/notion
 
 # install other things (mainly -dev)
 	dh_install -a
 
 # fix the installation
-	rm -f $(INSTDIR)/etc/X11/ion3/draw.lua
+	rm -f $(INSTDIR)/etc/X11/notion/draw.lua
 
 binary-indep: build-indep install-indep
 	dh_testdir
 	dh_testroot
 
 # automatically keep track of api version
-	echo Ion:ApiVersion=$$((cat version.h; echo ION_API_VERSION) \
+	echo Notion:ApiVersion=$$((cat version.h; echo ION_API_VERSION) \
 		| cpp -P | tail -1 | sed 's/"//g') >>debian/$(PACKAGE_DEV).substvars
 
 	dh_installchangelogs -i
@@ -111,7 +111,7 @@ binary-arch: build-arch install-arch
 	dh_testroot
 
 # automatically keep track of api version
-	echo Ion:ApiVersion=$$((cat version.h; echo ION_API_VERSION) \
+	echo Notion:ApiVersion=$$((cat version.h; echo ION_API_VERSION) \
 		| cpp -P | tail -1 | sed 's/"//g') >>debian/$(PACKAGE).substvars
 
 	dh_installchangelogs -a

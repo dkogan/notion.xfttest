@@ -1,0 +1,5 @@
+build/system-inc.mk build/rules.mk usr/share/notion/build
+install-sh config.h system.mk usr/lib/notion
+build/libs.mk usr/lib/notion/build
+libextl/libextl-mkexports usr/lib/notion/libextl
+debian/overrides/notion-dev usr/share/lintian/overrides

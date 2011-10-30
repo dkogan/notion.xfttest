@@ -14,18 +14,18 @@ if [ "$1" = configure ] \
     # debconf, but it seems slightly less unpleasant than maintaining
     # a renamed version. - benh
     uscan_output="$(uscan 2>&1 --no-conf --report-status \
-		    --package ion3 --upstream-version "$UPSTREAM_VERSION" \
-		    --watchfile /usr/share/ion3/debian/watch \
+		    --package notion --upstream-version "$UPSTREAM_VERSION" \
+		    --watchfile /usr/share/notion/debian/watch \
                     || true)"
     case "$uscan_output" in
 	*"up to date"*)
 	    question=''
 	    ;;
 	*"Newer version"*)
-	    question=ion3/acknowledge-outdated
+	    question=notion/acknowledge-outdated
 	    ;;
 	*)
-	    question=ion3/acknowledge-maybe-outdated
+	    question=notion/acknowledge-maybe-outdated
 	    ;;
     esac
     if [ -n "$question" ]; then
@@ -35,27 +35,27 @@ if [ "$1" = configure ] \
 	db_go || true
 	db_get $question
 	if [ "$RET" != true ]; then
-	    db_input high ion3/did-not-acknowledge-outdated || true
+	    db_input high notion/did-not-acknowledge-outdated || true
 	    db_go || true
 	    exit 1
 	fi
     fi
 fi
 
-if [ -h /etc/X11/ion3/draw.lua ]; then
-    rm -f /etc/X11/ion3/draw.lua
+if [ -h /etc/X11/notion/draw.lua ]; then
+    rm -f /etc/X11/notion/draw.lua
 fi
 
-ln -s look_clean.lua /etc/X11/ion3/draw.lua
+ln -s look_clean.lua /etc/X11/notion/draw.lua
 
-update-alternatives --install /usr/bin/ion ion /usr/bin/ion3 29 \
+update-alternatives --install /usr/bin/ion ion /usr/bin/notion 29 \
     --slave /usr/share/man/man1/ion.1.gz ion.1.gz \
-    /usr/share/man/man1/ion3.1.gz
+    /usr/share/man/man1/notion.1.gz
 
 update-alternatives --install \
-    /usr/bin/x-window-manager x-window-manager /usr/bin/ion3 49 \
+    /usr/bin/x-window-manager x-window-manager /usr/bin/notion 49 \
     --slave /usr/share/man/man1/x-window-manager.1.gz x-window-manager.1.gz \
-    /usr/share/man/man1/ion3.1.gz
+    /usr/share/man/man1/notion.1.gz
 
 update-alternatives --install \
     /usr/bin/x-window-manager x-window-manager /usr/bin/pwm3 48 \
@@ -63,15 +63,15 @@ update-alternatives --install \
     /usr/share/man/man1/pwm3.1.gz
 
 # i18n menu method
-inst=/etc/menu-methods/ion3-i18n
+inst=/etc/menu-methods/notion-i18n
 if [ -f $inst ]; then
     chmod a+x $inst
 fi
 
 # Initialise extra configuration file list if missing
-[ -f /etc/X11/ion3/cfg_debian_ext.lua ] || >/etc/X11/ion3/cfg_debian_ext.lua
+[ -f /etc/X11/notion/cfg_debian_ext.lua ] || >/etc/X11/notion/cfg_debian_ext.lua
 
 #DEBHELPER#
 
 # Remove the old now-renamed generated Debian menu
-rm -f /var/lib/ion3/debian-menus.lua
+rm -f /var/lib/notion/debian-menus.lua
