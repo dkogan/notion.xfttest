@@ -1,0 +1,74 @@
+# German translation of ion3 templates
+# Helge Kreutzmann <debian@helgefjell.de>, 2007.
+# This file is distributed under the same license as the ion3 package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ion3\n"
+"Report-Msgid-Bugs-To: ben@decadent.org.uk\n"
+"POT-Creation-Date: 2007-06-28 00:31+0100\n"
+"PO-Revision-Date: 2007-06-26 19:08+0200\n"
+"Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
+"Language-Team: German <debian-l10n-german@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../ion3.templates:2001
+msgid "Do you understand that this version is not supported by the author?"
+msgstr "Ist Ihnen klar, dass diese Version vom Autor nicht unterstützt wird?"
+
+#. Type: boolean
+#. Description
+#: ../ion3.templates:2001
+msgid ""
+"The version of Ion3 you are installing (version ${version}) is not the "
+"latest version released by the author."
+msgstr ""
+"Version ${version} von Ion3, die Sie installieren, ist nicht die neuste, vom "
+"Autor veröffentlichte Version."
+
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
+#: ../ion3.templates:2001 ../ion3.templates:3001
+msgid ""
+"DO NOT send bug reports or questions to the author unless they apply to the "
+"latest version, available at:\n"
+" http://modeemi.fi/~tuomov/ion/download.html"
+msgstr ""
+"Senden Sie KEINE Fehlerberichte oder Fragen zum Autor, es sei denn, diese "
+"treffen auch auf die neuste Version zu, die unter\n"
+" http://modeemi.fi/~tuomov/ion/download.htmlerhältlich ist."
+
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
+#: ../ion3.templates:2001 ../ion3.templates:3001
+msgid ""
+"Otherwise, you should send any bug reports about this package to the Debian "
+"bug tracking system and any other questions to the Debian maintainer."
+msgstr ""
+"Andernfalls sollten Sie alle Fehlerberichte zu diesem Paket an die Debian-"
+"Fehlerdatenbank und andere Fragen an den Debian-Betreuer schicken."
+
+#. Type: boolean
+#. Description
+#: ../ion3.templates:3001
+msgid "Do you understand that this version may not be supported by the author?"
+msgstr ""
+"Ist Ihnen klar, dass diese Version vom Autor nicht unterstützt werden könnte?"
+
+#. Type: boolean
+#. Description
+#: ../ion3.templates:3001
+msgid ""
+"The version of Ion3 you are installing (version ${version}) may not be the "
+"latest version released by the author."
+msgstr ""
+"Version ${version} von Ion3, die Sie installieren, könnte nicht die neuste, "
+"vom Autor veröffentlichte Version sein."

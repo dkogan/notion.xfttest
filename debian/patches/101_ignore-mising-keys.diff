@@ -1,0 +1,67 @@
+Wed Jul 23 18:30:48 BST 2008  Tuomo Valkonen <tuomov@iki.fi>
+  * Do not log complaints about keysym to keycode conversion failure.
+diff -rN -u old-ion-3plus/ioncore/conf-bindings.c new-ion-3plus/ioncore/conf-bindings.c
+--- old-ion-3plus/ioncore/conf-bindings.c	2008-07-24 21:29:07.000000000 +0100
++++ new-ion-3plus/ioncore/conf-bindings.c	2008-07-24 21:29:07.000000000 +0100
+@@ -20,6 +20,7 @@
+ #include <libextl/extl.h>
+ #include "conf-bindings.h"
+ #include "bindmaps.h"
++#include "ioncore.h"
+ 
+ 
+ /*{{{ parse_keybut */
+@@ -94,7 +95,8 @@
+                 break;
+             }
+             if(XKeysymToKeycode(ioncore_g.dpy, keysym)==0){
+-                warn_obj(str, TR("Could not convert keysym to keycode."));
++                ioncore_warn_nolog("%s: %s", str, 
++                                   TR("Could not convert keysym to keycode."));
+                 break;
+             }
+             *ksb_ret=keysym;
+diff -rN -u old-ion-3plus/ioncore/ioncore.c new-ion-3plus/ioncore/ioncore.c
+--- old-ion-3plus/ioncore/ioncore.c	2008-07-24 21:29:07.000000000 +0100
++++ new-ion-3plus/ioncore/ioncore.c	2008-07-24 21:29:07.000000000 +0100
+@@ -22,6 +22,7 @@
+ #ifndef CF_NO_GETTEXT
+ #include <libintl.h>
+ #endif
++#include <stdarg.h>
+ 
+ #include <libtu/util.h>
+ #include <libtu/optparser.h>
+@@ -99,12 +100,17 @@
+ /*{{{ warn_nolog */
+ 
+ 
+-void ioncore_warn_nolog(const char *str)
++void ioncore_warn_nolog(const char *str, ...)
+ {
+-    fprintf(stderr, "%s: %s\n", libtu_progname(), str);
++    va_list args;
++    
++    va_start(args, str);
++    fprintf(stderr, "%s: ", libtu_progname());
++    vfprintf(stderr, str, args);
++    fprintf(stderr, "\n");
++    va_end(args);
+ }
+ 
+-
+ /*}}}*/
+ 
+ 
+diff -rN -u old-ion-3plus/ioncore/ioncore.h new-ion-3plus/ioncore/ioncore.h
+--- old-ion-3plus/ioncore/ioncore.h	2008-07-24 21:29:07.000000000 +0100
++++ new-ion-3plus/ioncore/ioncore.h	2008-07-24 21:29:07.000000000 +0100
+@@ -28,6 +28,6 @@
+ extern WHook *ioncore_snapshot_hook;
+ extern WHook *ioncore_deinit_hook;
+ 
+-extern void ioncore_warn_nolog(const char *str);
++extern void ioncore_warn_nolog(const char *str, ...);
+ 
+ #endif /* ION_IONCORE_IONCORE_H */
+

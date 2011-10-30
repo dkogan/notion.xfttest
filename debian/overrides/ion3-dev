@@ -1,0 +1,2 @@
+ion3-dev: script-not-executable ./usr/lib/ion3/libextl/libextl-mkexports
+ion3-dev: unusual-interpreter ./usr/lib/ion3/libextl/libextl-mkexports #!/usr/bin/lua5.1

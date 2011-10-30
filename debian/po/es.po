@@ -1,0 +1,98 @@
+# ion3 translation to spanish
+# Copyright (C) 2007 Software in the Public Interest, SPI Inc.
+# This file is distributed under the same license as the no-ip package.
+#
+# Changes:
+# - Initial translation
+#       Fernando C. Estrada , 2007
+#
+#
+#  Traductores, si no conoce el formato PO, merece la pena leer la 
+#  documentación de gettext, especialmente las secciones dedicadas a este
+#  formato, por ejemplo ejecutando:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+# Equipo de traducción al español, por favor lean antes de traducir
+# los siguientes documentos:
+#
+# - El proyecto de traducción de Debian al español
+#   http://www.debian.org/intl/spanish/
+#   especialmente las notas y normas de traducción en
+#   http://www.debian.org/intl/spanish/notas
+#
+# - La guía de traducción de po's de debconf:
+#   /usr/share/doc/po-debconf/README-trans
+#   o http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+# Si tiene dudas o consultas sobre esta traducción consulte con el último
+# traductor (campo Last-Translator) y ponga en copia a la lista de
+# traducción de Debian al español (<debian-l10n-spanish@lists.debian.org>)
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ion3 20071109-1\n"
+"Report-Msgid-Bugs-To: ben@decadent.org.uk\n"
+"POT-Creation-Date: 2007-06-28 00:31+0100\n"
+"PO-Revision-Date: 2007-12-27 01:48-0600\n"
+"Last-Translator: Fernando C. Estrada <fcestrada@fcestrada.com>\n"
+"Language-Team: Debian Spanish <debian-l10n-spanish@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit"
+
+#. Type: boolean
+#. Description
+#: ../ion3.templates:2001
+msgid "Do you understand that this version is not supported by the author?"
+msgstr "¿Entiende que esta versión no está soportada por el autor?"
+
+#. Type: boolean
+#. Description
+#: ../ion3.templates:2001
+msgid ""
+"The version of Ion3 you are installing (version ${version}) is not the "
+"latest version released by the author."
+msgstr "La versión de Ion3 que está instalando (versión ${version}) no es la "
+"última versión publicada por el autor."
+
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
+#: ../ion3.templates:2001 ../ion3.templates:3001
+msgid ""
+"DO NOT send bug reports or questions to the author unless they apply to the "
+"latest version, available at:\n"
+" http://modeemi.fi/~tuomov/ion/download.html"
+msgstr "NO envíe informes de fallos o preguntas al autor, a menos que tengan "
+"que ver con la última versión, disponible en:\n"
+" http://modeemi.fi/~tuomov/ion/download.html"
+
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
+#: ../ion3.templates:2001 ../ion3.templates:3001
+msgid ""
+"Otherwise, you should send any bug reports about this package to the Debian "
+"bug tracking system and any other questions to the Debian maintainer."
+msgstr "Por el contrario, envíe cualquier informe de fallo sobre este paquete "
+"al sistema de seguimiento de fallos en Debian, y cualquier otra pregunta "
+"al encargado del paquete en Debian."
+
+#. Type: boolean
+#. Description
+#: ../ion3.templates:3001
+msgid "Do you understand that this version may not be supported by the author?"
+msgstr "¿Entiende que esta versión puede no estar soportada por el autor?"
+
+#. Type: boolean
+#. Description
+#: ../ion3.templates:3001
+msgid ""
+"The version of Ion3 you are installing (version ${version}) may not be the "
+"latest version released by the author."
+msgstr "La versión de Ion3 que está instalando (versión ${version}) puede no ser "
+"la última versión publicada por el autor."
+

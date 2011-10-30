@@ -1,0 +1,77 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+
+UPSTREAM_VERSION=
+DEBIAN_VERSION=
+
+if [ "$1" = configure ] \
+    && dpkg --compare-versions "$2" lt "$DEBIAN_VERSION"; then
+    # Installing for the first time or upgrading.
+    # To comply with the Ion trademark licence terms, we must ensure
+    # that this version is up-to-date or that the user acknowledges
+    # it is not.  I freely admit that this is a horrible abuse of
+    # debconf, but it seems slightly less unpleasant than maintaining
+    # a renamed version. - benh
+    uscan_output="$(uscan 2>&1 --no-conf --report-status \
+		    --package ion3 --upstream-version "$UPSTREAM_VERSION" \
+		    --watchfile /usr/share/ion3/debian/watch \
+                    || true)"
+    case "$uscan_output" in
+	*"up to date"*)
+	    question=''
+	    ;;
+	*"Newer version"*)
+	    question=ion3/acknowledge-outdated
+	    ;;
+	*)
+	    question=ion3/acknowledge-maybe-outdated
+	    ;;
+    esac
+    if [ -n "$question" ]; then
+	db_fset $question seen false
+	db_subst $question version $UPSTREAM_VERSION
+	db_input high $question || true
+	db_go || true
+	db_get $question
+	if [ "$RET" != true ]; then
+	    db_input high ion3/did-not-acknowledge-outdated || true
+	    db_go || true
+	    exit 1
+	fi
+    fi
+fi
+
+if [ -h /etc/X11/ion3/draw.lua ]; then
+    rm -f /etc/X11/ion3/draw.lua
+fi
+
+ln -s look_clean.lua /etc/X11/ion3/draw.lua
+
+update-alternatives --install /usr/bin/ion ion /usr/bin/ion3 29 \
+    --slave /usr/share/man/man1/ion.1.gz ion.1.gz \
+    /usr/share/man/man1/ion3.1.gz
+
+update-alternatives --install \
+    /usr/bin/x-window-manager x-window-manager /usr/bin/ion3 49 \
+    --slave /usr/share/man/man1/x-window-manager.1.gz x-window-manager.1.gz \
+    /usr/share/man/man1/ion3.1.gz
+
+update-alternatives --install \
+    /usr/bin/x-window-manager x-window-manager /usr/bin/pwm3 48 \
+    --slave /usr/share/man/man1/x-window-manager.1.gz x-window-manager.1.gz \
+    /usr/share/man/man1/pwm3.1.gz
+
+# i18n menu method
+inst=/etc/menu-methods/ion3-i18n
+if [ -f $inst ]; then
+    chmod a+x $inst
+fi
+
+# Initialise extra configuration file list if missing
+[ -f /etc/X11/ion3/cfg_debian_ext.lua ] || >/etc/X11/ion3/cfg_debian_ext.lua
+
+#DEBHELPER#
+
+# Remove the old now-renamed generated Debian menu
+rm -f /var/lib/ion3/debian-menus.lua
