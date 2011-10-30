@@ -1,0 +1,36 @@
+commit 75b4dc1f9fbd178db0689dae810d1b5c08bff086
+Author: Arnout <arnouten@bzzt.net>
+Date:   Thu Oct 20 18:21:06 2011 +0200
+
+    Support $(DESTDIR), thanks to Josef 'Jeff' Sipek
+
+commit 118bca12203c5fc45b4def1302187d1d3a2f6a26
+Merge: ff9acca f7f5544
+Author: Arnout <arnouten@bzzt.net>
+Date:   Sat Apr 9 14:09:51 2011 +0200
+
+    Merge branch 'master' into expose
+
+commit f7f55440d8afef1a3078e515489692cfc664a6ea
+Author: Arnout <arnouten@bzzt.net>
+Date:   Sat Apr 9 14:08:42 2011 +0200
+
+    use XRRRootToScreen to relate notion screens to RandR screen id's
+
+commit ff9acca8eb4d0425dc94576173ead57a687a64da
+Author: Arnout <arnouten@bzzt.net>
+Date:   Sat Apr 9 13:22:05 2011 +0200
+
+    Introduce a randr_screen_change_notify hook
+
+commit 6e7544fef7702b243c0229c81042d632a6fdc000
+Author: Arnout <arnouten@bzzt.net>
+Date:   Sat Apr 9 12:39:36 2011 +0200
+
+    ion-3 -> notion
+
+commit 6fad13eff6e14adac2307ba686917778ffcc4e49
+Author: M Rawash <mrawash@gmail.com>
+Date:   Fri Aug 20 16:55:19 2010 +0200
+
+    init

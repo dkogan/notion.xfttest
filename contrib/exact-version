@@ -1,0 +1,102 @@
+commit 55f37657f32f81a4a439e2c0893e2f7d852ad798
+Author: Arnout <arnouten@bzzt.net>
+Date:   Tue Sep 13 23:54:18 2011 +0200
+
+    ion->notion
+
+commit 86a23f2b70566880d1389048a1d06206cf2a4479
+Author: Arnout <arnouten@bzzt.net>
+Date:   Tue Sep 13 23:46:30 2011 +0200
+
+    add statusd_bitcoin, _drivers and _xmms2 to index.html
+
+commit 6f875863af8af4ec4446ba2383b328de7ae46215
+Merge: 47d26ce 2c4ed81
+Author: Arnout <arnouten@bzzt.net>
+Date:   Tue Sep 13 23:27:34 2011 +0200
+
+    Merge branch 'anion3_updates'
+
+commit 2c4ed8196fe73f6413c1cb50113e701d74eb8ce7
+Author: Arnout <arnouten@bzzt.net>
+Date:   Tue Sep 13 22:38:00 2011 +0200
+
+    index.html (including verification script)
+
+commit 50488960609388ae838fb74aa22a329f70ecd3d2
+Author: Arnout <arnouten@bzzt.net>
+Date:   Tue Sep 13 22:37:49 2011 +0200
+
+    install-scripts.sh
+
+commit 645b95d8cf2f5b4ff9187325db4a68fb88a1a8b7
+Author: Arnout <arnouten@bzzt.net>
+Date:   Tue Sep 13 22:33:15 2011 +0200
+
+    Add look_ootput_dark.lua
+
+commit 280b105886ccee661b737a74cb5ac3a60e8b88b1
+Author: Arnout <arnouten@bzzt.net>
+Date:   Tue Sep 13 22:31:53 2011 +0200
+
+    Be more lenient in what we receive from aumix
+
+commit 4ae309d32a8be5e0e9ecfb8cdee4a1bbeae93fe3
+Author: Arnout <arnouten@bzzt.net>
+Date:   Tue Sep 13 22:21:42 2011 +0200
+
+    Only update the workspace on screen_managed_changed_hook or region_notify_hook with 'how' = 'name'
+
+commit 47d26ce87fcae3932f43a94265f8921b14fde439
+Author: Voker57 <voker57@gmail.com>
+Date:   Thu Jan 20 16:27:55 2011 +0300
+
+    Small fix to drives monitor
+
+commit aac6224c464587d4792111f3d6d4874ab55d443c
+Author: Voker57 <voker57@gmail.com>
+Date:   Thu Jan 20 16:25:52 2011 +0300
+
+    Drives monitor for statusd, initial version
+
+commit c80ee291d82bc4475d05e9fc5be7425f875ec18e
+Author: Voker57 <voker57@gmail.com>
+Date:   Thu Jan 20 01:28:49 2011 +0300
+
+    statusd bitcoind monitor
+
+commit 4978258e7ade2ff72f3389a0337d9afd1b81f0f6
+Author: Voker57 <voker57@gmail.com>
+Date:   Thu Jan 20 01:28:31 2011 +0300
+
+    statusd xmms2 monitor
+
+commit 0c648217174b6243445b38d4dd64b34534625a32
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Mon Jun 14 23:32:46 2010 -0400
+
+    Call obj_typename rather than using __typename directly.
+
+commit 4892f199ff11759f5c4084af0cbeeafe313aa4cd
+Author: Juri Hamburg <juri@corvinusbase.localdomain>
+Date:   Mon Jun 14 13:06:14 2010 +0200
+
+    Usage of statusbar scripts corrected.
+
+commit 7e09de62f9d2c99bf016210f70de806966301b32
+Author: Juri Hamburg <juri@fail2fail.com>
+Date:   Thu Jun 10 11:54:23 2010 +0200
+
+    improve/bugfix autoprop.lua
+
+commit a5318d1444353ae3e88e95d39cb85e939a5b2be9
+Author: Juri Hamburg <juri@corvinusbase.localdomain>
+Date:   Thu Jun 10 11:16:44 2010 +0200
+
+    initial commit from http://folk.ntnu.no/bronner/temp/ion3/repos/ion-scripts-3/ snapshot.
+
+commit 9575b9521020a8758c2e30bee46d8b16ee7333a7
+Author: Juri Hamburg <juri@fail2fail.com>
+Date:   Thu Jun 10 11:06:42 2010 +0200
+
+    Initial commit: License and Readme

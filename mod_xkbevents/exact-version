@@ -1,0 +1,93 @@
+commit cdb4444d1ff89b179f02ddd89fcd6bac0ee8a3c2
+Author: Arnout <arnouten@bzzt.net>
+Date:   Wed Sep 14 18:26:54 2011 +0200
+
+    Merge mod_xkb functionality in here, thanks to Sergej Pupykin for the patch.
+
+commit c7e9a45f70b8807b434c6413ab8fc11eabf79965
+Author: Arnout <arnouten@bzzt.net>
+Date:   Sat Jun 11 11:52:53 2011 +0200
+
+    load 'mod_xkbevents', not 'xkbevents'
+
+commit 0554797ec9d51061b9bf91ebda4cf984f4b25dbe
+Author: Arnout <arnouten@bzzt.net>
+Date:   Sat Jun 11 11:48:40 2011 +0200
+
+    set 'TOPDIR' more consistently
+
+commit 4f1135c1e0a3bddf92e74f65e42414e647721723
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Mon May 9 01:21:42 2011 -0400
+
+    Statusbar script to display the current xkb group.
+    
+    Known issues:
+     - Doesn't display anything on startup (only after first group switch).
+     - Only displays group number not name.
+
+commit 96f937a611d765a0f58a605fae348c7261b471c8
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Mon May 9 01:20:37 2011 -0400
+
+    More ignored files.
+
+commit 4c452f5f13c7fb564aa8791cda40af1422abfb35
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Mon May 9 01:19:07 2011 -0400
+
+    Correct the horribly broken logic test here.
+
+commit f4a3497c3dd343876db3ce925c7add4252e20d8a
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Mon May 9 00:54:41 2011 -0400
+
+    Last xkbevents -> mod_xkbevents change.
+
+commit 134f946a76d177b1971f990ca682c4a4d163a339
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Mon May 9 00:52:49 2011 -0400
+
+    s/xkbevents/mod_xkbevents/
+
+commit 0c85916b397811585149d42ed4a96f1828ca1173
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Mon May 9 00:36:28 2011 -0400
+
+    Undef the macros when we are done with them.
+
+commit 2b249388e782d7e4cb1268126d41499e605e6132
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Mon May 9 00:36:04 2011 -0400
+
+    .gitignore
+
+commit b8541dbd30f3938519562edb12abc0073ca41df9
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Mon May 9 00:35:15 2011 -0400
+
+    Use the right name.
+
+commit d8f079b3212fcaa9acbb0492bbf9d6eff2a48c4d
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Sun May 8 23:21:41 2011 -0400
+
+    Change how we fail when mod_xkbevents can't be found.
+
+commit 86dd4298fee22d25bbbb2ef8b3f93c8c272afb4a
+Author: Arnout Engelen <arnouten@bzzt.net>
+Date:   Sun May 8 20:52:31 2011 +0200
+
+    minor syntax/style/typo errors
+
+commit 31f69300e5dc69f5e1b20811feab69e0ded378b4
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Fri May 6 02:25:16 2011 -0400
+
+    Add xkbbell.lua script.
+
+commit 2234c7a2d9134bbd7741db8517d057df60aa68cc
+Author: Etan Reisner <deryni@unreliablesource.net>
+Date:   Fri May 6 02:24:19 2011 -0400
+
+    Initial commit of xkbevents module.
