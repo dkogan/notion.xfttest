@@ -1,3 +1,9 @@
+notion (3-2011102900-1) unstable; urgency=low
+
+  * Started packaging notion (based on existing Ion3 packaging)
+
+ -- Arnout Engelen <arnouten@bzzt.net>  Sun, 30 Oct 2011 19:30:28 +0100
+
 ion3 (20080825-1) unstable; urgency=low
 
   * New upstream version
