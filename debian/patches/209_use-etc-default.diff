@@ -1,10 +1,10 @@
---- ion3.orig/etc/cfg_ion.lua
-+++ ion3/etc/cfg_ion.lua
+--- ion3.orig/etc/cfg_notion.lua
++++ ion3/etc/cfg_notion.lua
 @@ -16,6 +16,8 @@
  -- Set default modifiers. Alt should usually be mapped to Mod1 on
  -- XFree86-based systems. The flying window keys are probably Mod3
  -- or Mod4; see the output of 'xmodmap'.
-+-- These may be defined in /etc/default/ion3, loaded as cfg_debian.
++-- These may be defined in /etc/default/notion, loaded as cfg_debian.
 +dopath("cfg_debian")
  --META="Mod1+"
  --ALTMETA=""
