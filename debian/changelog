@@ -1,4 +1,4 @@
-notion (3-2011102900-1) unstable; urgency=low
+notion (3+2011102900-1) unstable; urgency=low
 
   * Started packaging notion (based on existing Ion3 packaging)
 
