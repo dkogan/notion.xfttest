@@ -1,7 +1,7 @@
 Source: notion
 Section: non-free/x11
 Priority: extra
-Maintainer: Arnout Engelen <arnout.engelen@bzzt.net>
+Maintainer: Arnout Engelen <arnouten@bzzt.net>
 Standards-Version: 3.8.1
 Build-Depends: debhelper (>= 7), gcc (>> 3), libx11-dev, libxext-dev, libsm-dev, liblua5.1-0-dev, lua5.1, quilt, pkg-config, groff-base, po-debconf
 XS-Autobuild: yes
