@@ -5,43 +5,6 @@ set -e
 UPSTREAM_VERSION=
 DEBIAN_VERSION=
 
-if [ "$1" = configure ] \
-    && dpkg --compare-versions "$2" lt "$DEBIAN_VERSION"; then
-    # Installing for the first time or upgrading.
-    # To comply with the Ion trademark licence terms, we must ensure
-    # that this version is up-to-date or that the user acknowledges
-    # it is not.  I freely admit that this is a horrible abuse of
-    # debconf, but it seems slightly less unpleasant than maintaining
-    # a renamed version. - benh
-    uscan_output="$(uscan 2>&1 --no-conf --report-status \
-		    --package notion --upstream-version "$UPSTREAM_VERSION" \
-		    --watchfile /usr/share/notion/debian/watch \
-                    || true)"
-    case "$uscan_output" in
-	*"up to date"*)
-	    question=''
-	    ;;
-	*"Newer version"*)
-	    question=notion/acknowledge-outdated
-	    ;;
-	*)
-	    question=notion/acknowledge-maybe-outdated
-	    ;;
-    esac
-    if [ -n "$question" ]; then
-	db_fset $question seen false
-	db_subst $question version $UPSTREAM_VERSION
-	db_input high $question || true
-	db_go || true
-	db_get $question
-	if [ "$RET" != true ]; then
-	    db_input high notion/did-not-acknowledge-outdated || true
-	    db_go || true
-	    exit 1
-	fi
-    fi
-fi
-
 if [ -h /etc/X11/notion/draw.lua ]; then
     rm -f /etc/X11/notion/draw.lua
 fi

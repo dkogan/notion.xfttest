@@ -44,7 +44,7 @@ clean: unpatch
 install-indep: build-indep
 	dh_testdir
 	dh_testroot
-	dh_clean -i -k
+	dh_prep -i
 	dh_installdirs -i
 	dh_install -i
 
@@ -56,7 +56,7 @@ install-indep: build-indep
 install-arch: build-arch
 	dh_testdir
 	dh_testroot
-	dh_clean -a -k
+	dh_prep -a
 	dh_installdirs -a
 
 	$(MAKE) install \
@@ -97,6 +97,7 @@ binary-indep: build-indep install-indep
 #	dh_strip -i
 	dh_compress -i
 	dh_fixperms -i
+	chmod 755 $(INSTDIR_DEV)/usr/lib/notion/libextl/libextl-mkexports
 #	dh_perl -i
 #	dh_python -i
 #	dh_makeshlibs -i

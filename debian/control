@@ -2,15 +2,15 @@ Source: notion
 Section: non-free/x11
 Priority: extra
 Maintainer: Arnout Engelen <arnout.engelen@bzzt.net>
-Standards-Version: 3.8.0
-Build-Depends: debhelper (>= 4.1.16), gcc (>> 3), libx11-dev, libxext-dev, libsm-dev, liblua5.1-0-dev, lua5.1, quilt, pkg-config, groff-base, po-debconf
+Standards-Version: 3.8.1
+Build-Depends: debhelper (>= 7), gcc (>> 3), libx11-dev, libxext-dev, libsm-dev, liblua5.1-0-dev, lua5.1, quilt, pkg-config, groff-base, po-debconf
 XS-Autobuild: yes
 
 Package: notion
 Section: non-free/x11
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}, xterm | x-terminal-emulator, x11-utils
-Recommends: devscripts, libwww-perl, xfonts-75dpi | xfonts-75dpi-transcoded | xfonts-100dpi | xfonts-100dpi-transcoded
+Recommends: xfonts-75dpi | xfonts-75dpi-transcoded | xfonts-100dpi | xfonts-100dpi-transcoded
 Suggests: menu (>= 2.1.9), docker, notion-doc, notion-scripts
 Provides: x-window-manager, notion-api-${Notion:ApiVersion}
 Replaces: particleman
@@ -28,7 +28,7 @@ Package: notion-dev
 Section: non-free/devel
 Priority: extra
 Architecture: all
-Depends: libx11-dev, libsm-dev, lua5.1, gcc (>> 3)
+Depends: ${misc:Depends}, libx11-dev, libsm-dev, lua5.1, gcc (>> 3)
 Description: Notion development files
  This package contains the files necessary for building extension
  modules to the Notion window manager
