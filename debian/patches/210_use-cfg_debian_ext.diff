@@ -1,5 +1,5 @@
---- ion3.orig/etc/cfg_defaults.lua
-+++ ion3/etc/cfg_defaults.lua
+--- a/etc/cfg_defaults.lua
++++ b/etc/cfg_defaults.lua
 @@ -11,3 +11,6 @@
  dopath("mod_tiling")
  dopath("mod_statusbar")

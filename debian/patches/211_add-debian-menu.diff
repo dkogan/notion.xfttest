@@ -1,5 +1,5 @@
---- ion3.orig/etc/cfg_notioncore.lua
-+++ ion3/etc/cfg_notioncore.lua
+--- a/etc/cfg_notioncore.lua
++++ b/etc/cfg_notioncore.lua
 @@ -335,6 +335,7 @@
      menuentry("Help",           "mod_query.query_man(_)"),
      menuentry("About Notion",      "mod_query.show_about_ion(_)"),

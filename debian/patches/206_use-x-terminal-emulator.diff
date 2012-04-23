@@ -1,7 +1,7 @@
---- ion3.orig/etc/cfg_notioncore.lua
-+++ ion3/etc/cfg_notioncore.lua
+--- a/etc/cfg_notioncore.lua
++++ b/etc/cfg_notioncore.lua
 @@ -143,7 +143,7 @@
-     kpress(META.."F1", "ioncore.exec_on(_, ':man ion3')"),
+     kpress(META.."F1", "ioncore.exec_on(_, ':man notion')"),
  
      bdoc("Run a terminal emulator."),
 -    kpress(ALTMETA.."F2", "ioncore.exec_on(_, XTERM or 'xterm')"),
@@ -16,10 +16,10 @@
 -    menuentry("Terminal",       "ioncore.exec_on(_, XTERM or 'xterm')"),
 +    menuentry("Terminal",       "notioncore.exec_on(_, XTERM or 'x-terminal-emulator')"),
      menuentry("Lock screen",
-               "notioncore.exec_on(_, notioncore.lookup_script('ion-lock'))"),
+               "notioncore.exec_on(_, notioncore.lookup_script('notion-lock'))"),
      menuentry("Help",           "mod_query.query_man(_)"),
---- ion3.orig/utils/ion-runinxterm
-+++ ion3/utils/ion-runinxterm
+--- a/utils/ion-runinxterm
++++ b/utils/ion-runinxterm
 @@ -1,6 +1,6 @@
  #!/bin/sh
  
