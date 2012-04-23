@@ -1,3 +1,37 @@
+commit 2ce512189cf5d9fb09cfe8bf644b4d980b6c9923
+Author: Arnout Engelen <arnouten@bzzt.net>
+Date:   Sat Apr 21 00:52:10 2012 +0200
+
+    Update the list of virtual roots after refreshing the Xinerama screens
+    
+    https://sourceforge.net/tracker/index.php?func=detail&aid=3162974&group_id=314802&atid=1324528
+
+commit b0c1f3df293cf70e948835edee974f9fad49bca7
+Author: Arnout Engelen <arnouten@bzzt.net>
+Date:   Fri Apr 20 22:20:15 2012 +0200
+
+    Warnings about load order of xinerama and docks/statusbar no longer needed
+
+commit a17bf06ecf3e874cb1fb8eff1edeb1949ebd4b96
+Author: Arnout Engelen <arnouten@bzzt.net>
+Date:   Fri Apr 20 21:24:27 2012 +0200
+
+    Remove hacks, because notion was fixed and screens can be properly resized now.
+    
+    Many thanks to AopicieR/Philipp Hartwig
+
+commit b8f25271766a46b93b8c0987653078ea7fabc861
+Author: Arnout Engelen <arnouten@bzzt.net>
+Date:   Fri Apr 20 18:43:37 2012 +0200
+
+    'Ion'->'Notion'
+
+commit 4f6d465cf86a44cb10f5738aa9306d5443e74b19
+Author: Arnout Engelen <arnouten@bzzt.net>
+Date:   Thu Nov 17 21:53:45 2011 +0100
+
+    Warn when loading mod_xinerama after mod_dock or mod_statusbar, which currently does not work well
+
 commit 19b8cc6783ac841ec31536df5c48e254eedf675a
 Author: Arnout <arnouten@bzzt.net>
 Date:   Thu Oct 20 18:20:10 2011 +0200

@@ -326,8 +326,6 @@ end
 --
 -- Example input: {{x=0,y=0,w=1024,h=768},{x=1024,y=0,w=1280,h=1024}}
 function mod_xinerama.setup_screens(screens)
-    mod_xinerama.set_root_screen_id(-2)
-
     local max_screen_id = 0
     local max_right
 
@@ -365,7 +363,6 @@ end
 -- Mark ourselves loaded.
 package.loaded["mod_xinerama"]=true
 
-
 -- Load configuration file
 dopath('cfg_xinerama', true)
 
@@ -378,6 +375,7 @@ function mod_xinerama.refresh()
         local merged_screens = mod_xinerama.merge_overlapping_screens(screens)
         mod_xinerama.setup_screens(merged_screens)
     end 
+    notioncore.screens_updated(notioncore.rootwin());
 end
 
 mod_xinerama.refresh()

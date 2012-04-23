@@ -1,3 +1,19 @@
+commit ad87a500852c3bd3683b932a72365b7580995725
+Author: Arnout Engelen <arnouten@bzzt.net>
+Date:   Sat Apr 21 10:53:02 2012 +0200
+
+    Revert "Insist that $(LUA) exists when building libextl-mkexports"
+    
+    Breaks with dynamic values for $(LUA) :/
+    
+    This reverts commit 2da1278d46f2a42b70ada5cc5ae914d094996545.
+
+commit 2da1278d46f2a42b70ada5cc5ae914d094996545
+Author: Arnout Engelen <arnouten@bzzt.net>
+Date:   Sat Apr 21 01:35:10 2012 +0200
+
+    Insist that $(LUA) exists when building libextl-mkexports
+
 commit 4bcb5dba0fa14e0fcde3f99410ccb144bdd94ee8
 Author: Arnout <arnouten@bzzt.net>
 Date:   Thu Oct 20 18:16:55 2011 +0200
