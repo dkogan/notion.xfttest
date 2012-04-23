@@ -1,3 +1,18 @@
+notion (3+2012042300-1) unstable; urgency=low
+
+  * Import new upstream version
+  * Updated EWMH support:
+    - _NET_WM_ALLOWED_ACTIONS
+    - _NET_VIRTUAL_ROOTS
+    - _NET_SUPPORTING_WM_CHECK
+  * Mark windows as 'activated' instead of raising them
+  * Suppress gnome3's resize handles, as they don't work with Notion
+  * Firefox fullscreen
+  * Flash fullscreen
+  * Various internal refactorings and cleanups
+
+ -- Arnout Engelen <arnouten@bzzt.net>  Mon, 23 Apr 2012 19:18:20 +0200
+
 notion (3+2011102900-1) unstable; urgency=low
 
   * Started packaging notion (based on existing Ion3 packaging)
