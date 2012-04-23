@@ -1,5 +1,5 @@
---- ion3.orig/etc/cfg_kludges.lua
-+++ ion3/etc/cfg_kludges.lua
+--- a/etc/cfg_kludges.lua
++++ b/etc/cfg_kludges.lua
 @@ -26,6 +26,13 @@
      min_size = { w = 64, h = 64},
  }

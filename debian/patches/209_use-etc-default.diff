@@ -1,5 +1,5 @@
---- ion3.orig/etc/cfg_notion.lua
-+++ ion3/etc/cfg_notion.lua
+--- a/etc/cfg_notion.lua
++++ b/etc/cfg_notion.lua
 @@ -16,6 +16,8 @@
  -- Set default modifiers. Alt should usually be mapped to Mod1 on
  -- XFree86-based systems. The flying window keys are probably Mod3

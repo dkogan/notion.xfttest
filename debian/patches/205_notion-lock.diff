@@ -1,5 +1,5 @@
---- ion3.orig/etc/cfg_notioncore.lua
-+++ ion3/etc/cfg_notioncore.lua
+--- a/etc/cfg_notioncore.lua
++++ b/etc/cfg_notioncore.lua
 @@ -330,7 +330,8 @@
  defmenu("mainmenu", {
      menuentry("Run...",         "mod_query.query_exec(_)"),
@@ -10,8 +10,8 @@
      menuentry("Help",           "mod_query.query_man(_)"),
      menuentry("About Notion",      "mod_query.show_about_ion(_)"),
      submenu("Styles",           "stylemenu"),
---- ion3.orig/utils/Makefile
-+++ ion3/utils/Makefile
+--- a/utils/Makefile
++++ b/utils/Makefile
 @@ -11,7 +11,7 @@
  SUBDIRS=ion-completefile ion-statusd
  INSTALL_SUBDIRS=$(SUBDIRS)
@@ -22,7 +22,7 @@
  TARGETS = ion-completeman
  
 --- /dev/null
-+++ ion3/utils/notion-lock
++++ b/utils/notion-lock
 @@ -0,0 +1,6 @@
 +#!/bin/sh
 +if xscreensaver-command -version >/dev/null 2>&1; then

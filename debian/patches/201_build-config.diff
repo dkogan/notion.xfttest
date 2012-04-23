@@ -1,7 +1,5 @@
-Index: ion3-20080707/system.mk
-===================================================================
---- ion3-20080707.orig/system.mk	2008-07-07 16:39:16.000000000 +0100
-+++ ion3-20080707/system.mk	2008-07-11 00:31:29.000000000 +0100
+--- a/system.mk
++++ b/system.mk
 @@ -8,7 +8,7 @@
  
  # Installation path prefix. Unless you know what you're doing, the default
@@ -34,7 +32,7 @@ Index: ion3-20080707/system.mk
  # For notion-completeman system-wide cache
  VARDIR=/var/cache/notion
  # Message catalogs
-@@ -127,7 +127,7 @@
+@@ -146,7 +146,7 @@
  # You may uncomment this if you know that your system C libary provides
  # asprintf and  vasprintf. (GNU libc does.) If HAS_SYSTEM_ASPRINTF is not
  # defined, an implementation provided in libtu/sprintf_2.2/ is used. 
@@ -43,7 +41,7 @@ Index: ion3-20080707/system.mk
  
  # The following setting is needed with GNU libc for clock_gettime and the
  # monotonic clock. Other systems may not need it, or may not provide a
-@@ -172,11 +172,11 @@
+@@ -191,11 +191,11 @@
  POSIX_SOURCE=-D_POSIX_C_SOURCE=200112L
  
  # Most systems

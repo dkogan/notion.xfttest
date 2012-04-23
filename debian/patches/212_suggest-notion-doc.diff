@@ -1,6 +1,6 @@
---- particleman.orig/man/notion.in
-+++ particleman/man/notion.in
-@@ -150,8 +150,8 @@
+--- a/man/notion.in
++++ b/man/notion.in
+@@ -151,8 +151,8 @@
  .SH SEE ALSO
  The Notion home page, \fIhttp://notion.sf.net/\fP
  .PP
@@ -11,8 +11,8 @@
  .PP
  .I DOCDIR/
  .PP
---- particleman.orig/man/welcome.head
-+++ particleman/man/welcome.head
+--- a/man/welcome.head
++++ b/man/welcome.head
 @@ -14,11 +14,10 @@
  accessed with <F12>.
  
