@@ -16,7 +16,7 @@ Recommends: xfonts-75dpi | xfonts-75dpi-transcoded | xfonts-100dpi | xfonts-100d
 Suggests: menu (>= 2.1.9), docker, notion-doc, notion-scripts
 Provides: x-window-manager, notion-api-${Notion:ApiVersion}
 Replaces: particleman
-Homepage: http://notion.sourceforge.net/
+Homepage: http://iki.fi/tuomov/ion/
 Description: tiling tabbed window manager designed for keyboard users
  Notion divides the screen into tiles and places windows in these tiles
  by default.  Each tile has a set of tabs for the windows within it.
