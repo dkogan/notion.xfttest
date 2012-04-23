@@ -34,7 +34,6 @@
 #include <X11/Xatom.h>
 #include <X11/Xutil.h>
 #include <X11/extensions/shape.h>
-#include <X11/extensions/Xext.h>
 
 #include <libtu/objp.h>
 #include <libtu/map.h>
@@ -84,10 +83,6 @@
 
 static const char *modname="dock";
 const char mod_dock_ion_api_version[]=NOTION_API_VERSION;
-
-static bool shape_extension=FALSE;
-static int shape_event_basep=0;
-static int shape_error_basep=0;
 
 static WBindmap *dock_bindmap=NULL;
 
@@ -399,9 +394,8 @@ static void dock_reshape(WDock *dock)
 {
     int outline_style;
     
-    if(!shape_extension){
+    if(!ioncore_g.shape_extension)
         return;
-    }
     
     dock_get_outline_style(dock, &outline_style);
     
@@ -834,7 +828,7 @@ static bool dock_fitrep(WDock *dock, WWindow *parent, const WFitParams *fp)
 
     dock_arrange_dockapps(dock, &(fp->g), NULL, NULL);
     
-    if(shape_extension)
+    if(ioncore_g.shape_extension)
         dock_reshape(dock);
     
     return TRUE;
@@ -1123,7 +1117,7 @@ static bool dock_init(WDock *dock, WWindow *parent, const WFitParams *fp)
     dock->save=TRUE;
 
     
-    if(!window_init((WWindow*)dock, parent, &fp2, "Notion WDock"))
+    if(!window_init((WWindow*)dock, parent, &fp2, "WDock"))
         return FALSE;
     
     region_add_bindmap((WRegion*)dock, dock_bindmap);
@@ -1589,13 +1583,6 @@ static bool clientwin_do_manage_hook(WClientWin *cwin, const WManageParams *para
 
 bool mod_dock_init()
 {
-
-    if(XShapeQueryExtension(ioncore_g.dpy, &shape_event_basep,
-                            &shape_error_basep)){
-        shape_extension=TRUE;
-    }else{
-        XMissingExtension(ioncore_g.dpy, "SHAPE");
-    }
 
     if(!ioncore_register_regclass(&CLASSDESCR(WDock), 
                                   (WRegionLoadCreateFn*)dock_load)){
