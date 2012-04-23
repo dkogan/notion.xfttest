@@ -344,6 +344,8 @@ static bool clientwin_init(WClientWin *cwin, WWindow *par, Window win,
     clientwin_get_protocols(cwin);
     clientwin_get_winprops(cwin);
     clientwin_get_size_hints(cwin);
+
+    netwm_update_allowed_actions(cwin);
     
     XSaveContext(ioncore_g.dpy, win, ioncore_g.win_context, (XPointer)cwin);
     XAddToSaveSet(ioncore_g.dpy, win);
@@ -980,14 +982,23 @@ static bool clientwin_fitrep(WClientWin *cwin, WWindow *np,
     
     if(np!=NULL){
         region_unset_parent((WRegion*)cwin);
-        do_reparent_clientwin(cwin, np->win, geom.x, geom.y);
+
+        /**
+         * update netwm properties before mapping, because some apps check the
+         * netwm state directly when mapped.
+         *
+         * also, update netwm properties after setting the parent, because
+         * the new state of _NET_WM_STATE_FULLSCREEN is determined based on
+         * the parent of the cwin.
+         */                                                                                     
         region_set_parent((WRegion*)cwin, np);
+        netwm_update_state(cwin);
+
+        do_reparent_clientwin(cwin, np->win, geom.x, geom.y);
         sendconfig_clientwin(cwin);
         
         if(!REGION_IS_FULLSCREEN(cwin))
             cwin->flags&=~CLIENTWIN_FS_RQ;
-
-        netwm_update_state(cwin);
     }
     
     if (postpone_resize(cwin))
@@ -1256,16 +1267,12 @@ static bool check_normal_cfgrq(WClientWin *cwin, XConfigureRequestEvent *ev)
     }
 
     if(ev->value_mask&CWStackMode){
-        WMPlex* mplex = find_mplexer((WRegion*) cwin);
         switch(ev->detail){
         case Above:
-            /* If ev->above is not None, the window should be placed just 
-             * above the sibling. This is not implemented.
-             */
-            if (mplex != NULL && ev->above == None) {
-                mplex_switch_to(mplex, (WRegion*) cwin);
-                result = TRUE;
-            }
+            region_set_activity((WRegion*) cwin, SETPARAM_SET);
+            /* TODO we should be more conservative here - but what does/should
+             * region_set_activity return? */
+            result = TRUE;
             break;
         case Below:
         case TopIf:

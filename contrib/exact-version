@@ -1,3 +1,65 @@
+commit 5ff1a271e18d5afc701719c78cb4daea0d2754cc
+Author: Arnout Engelen <arnouten@bzzt.net>
+Date:   Thu Jan 5 22:12:15 2012 +0100
+
+    script to generate a version of the index that should work from gitweb
+
+commit 01a566050bc10bec41ecf8a876b1fb1d19857017
+Author: Arnout <arnouten@bzzt.net>
+Date:   Thu Dec 8 02:26:53 2011 +0100
+
+    Announce availability of _NET_CLIENT_LIST in _NET_SUPPORTED
+
+commit c8258bb94fdb73943f8087427a71ba7508b38bf1
+Merge: cf175d0 5b49875
+Author: Arnout Engelen <arnouten@bzzt.net>
+Date:   Sun Nov 20 22:04:56 2011 +0100
+
+    Merge branch 'master' of https://github.com/jhamb/NotionScriptsCollection
+
+commit cf175d0ba12d47d64b21a8b9e640920a311e365d
+Author: Arnout Engelen <arnouten@bzzt.net>
+Date:   Thu Nov 3 13:28:10 2011 +0100
+
+    Document getting and contributing to the collection (briefly)
+
+commit 5b498755863f63d6fd1a14061416a60ac036dbdf
+Author: Juri Hamburg <juri@fail2fail.com>
+Date:   Mon Oct 31 22:06:03 2011 +0100
+
+    fix typos in comments of statusd_laptopstatus.lua
+
+commit 0f3bde9325ed281924bbeba9a2c296939a6eb7e0
+Author: Juri Hamburg <juri@fail2fail.com>
+Date:   Mon Oct 31 22:01:34 2011 +0100
+
+    add estimated discharging time for sysfs interface (with ringbuffer for more stable estimated time value)
+
+commit f5e61c645954ff05ec28d81fad4d1934bd2f3049
+Author: Juri Hamburg <juri@fail2fail.com>
+Date:   Mon Oct 31 01:22:34 2011 +0100
+
+    Strings n/a and AC as global variables.
+
+commit ab012ed77728ade7c5df1cd5401cfe6c606f0c54
+Author: Juri Hamburg <juri@fail2fail.com>
+Date:   Mon Oct 31 01:12:50 2011 +0100
+
+    Close file before function return. Fix AC string issue.
+
+commit b94a2ad8aad6b629ed58ee0c226c497a6d10bc89
+Author: Juri Hamburg <juri@fail2fail.com>
+Date:   Sun Oct 30 23:58:31 2011 +0100
+
+    added initial sysfs support
+
+commit ba51e6e3e9a6a6c9049000871b3935348fdb93d9
+Merge: f2bdedd 55f3765
+Author: Juri Hamburg <juri@fail2fail.com>
+Date:   Sun Oct 30 18:11:47 2011 +0100
+
+    Merge remote-tracking branch 'notion-sourceforge/master'
+
 commit 55f37657f32f81a4a439e2c0893e2f7d852ad798
 Author: Arnout <arnouten@bzzt.net>
 Date:   Tue Sep 13 23:54:18 2011 +0200
@@ -46,6 +108,18 @@ Author: Arnout <arnouten@bzzt.net>
 Date:   Tue Sep 13 22:21:42 2011 +0200
 
     Only update the workspace on screen_managed_changed_hook or region_notify_hook with 'how' = 'name'
+
+commit f2bdedd06a71c79fc958aa1749b2564af1558b64
+Author: Voker57 <voker57@gmail.com>
+Date:   Fri Jan 28 15:19:36 2011 +0300
+
+    Sorting drives' names
+
+commit e066ff3e3e059fdcdf1a88b123b31209f2b4dc67
+Author: Voker57 <voker57@gmail.com>
+Date:   Fri Jan 28 15:13:04 2011 +0300
+
+    Improved bitcoin monitor
 
 commit 47d26ce87fcae3932f43a94265f8921b14fde439
 Author: Voker57 <voker57@gmail.com>

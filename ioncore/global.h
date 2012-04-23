@@ -74,6 +74,8 @@ DECLSTRUCT(WGlobal){
     
     /* We could have a display WRegion but the screen-link could impose
      * some problems so these are handled as a special case.
+     *
+     * This is a doubly-linked list with links 'active_next' and 'active_prev'
      */
     WRegion *focus_current;
     
@@ -116,6 +118,11 @@ DECLSTRUCT(WGlobal){
                  map,
                  unmap;
     } notifies;
+
+    /** XShape extension presence */
+    bool shape_extension;
+    int shape_event_basep;
+    int shape_error_basep;
 };
 
 
