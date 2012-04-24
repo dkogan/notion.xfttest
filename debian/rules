@@ -5,8 +5,6 @@
 
 export SHELL=/bin/bash
 
-include /usr/share/quilt/quilt.make
-
 PACKAGE := $(shell dpkg-parsechangelog | sed -r 's/^Source: //; t; d')
 PACKAGE_DEV := $(PACKAGE)-dev
 INSTDIR := debian/$(PACKAGE)
@@ -15,7 +13,7 @@ DEBIAN_VERSION := $(shell dpkg-parsechangelog | sed -r 's/^Version: //; t; d')
 UPSTREAM_VERSION := $(shell echo $(DEBIAN_VERSION) | sed -r 's/^[0-9]*://; s/-[^-]*$$//')
 
 build-indep: build-indep-stamp
-build-indep-stamp: patch
+build-indep-stamp:
 	dh_testdir
 
 	cd libextl && $(MAKE) libextl-mkexports
@@ -23,7 +21,7 @@ build-indep-stamp: patch
 	touch build-indep-stamp
 
 build-arch: build-arch-stamp
-build-arch-stamp: patch
+build-arch-stamp:
 	dh_testdir
 
 	$(MAKE)
@@ -32,7 +30,7 @@ build-arch-stamp: patch
 
 build: build-indep build-arch
 
-clean: unpatch
+clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-indep-stamp build-arch-stamp
@@ -150,4 +148,4 @@ get-orig-source:
 	uscan --force-download
 
 .PHONY: build-indep build-arch build clean binary-indep binary-arch binary \
-	install-indep install-arch unpatch get-orig-source
+	install-indep install-arch get-orig-source
