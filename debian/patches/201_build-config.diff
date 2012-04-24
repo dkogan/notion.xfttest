@@ -1,3 +1,4 @@
+Build options suitable for installation from the official package on Debian
 --- a/system.mk
 +++ b/system.mk
 @@ -8,7 +8,7 @@

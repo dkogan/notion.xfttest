@@ -1,3 +1,5 @@
+Use 'xscreensaver-command -lock' when available. This should eventually be
+included upstream.
 --- a/etc/cfg_notioncore.lua
 +++ b/etc/cfg_notioncore.lua
 @@ -330,7 +330,8 @@

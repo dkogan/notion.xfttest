@@ -1,3 +1,4 @@
+Add a 'Debian' menu populated by the Debian menu system
 --- a/etc/cfg_notioncore.lua
 +++ b/etc/cfg_notioncore.lua
 @@ -335,6 +335,7 @@

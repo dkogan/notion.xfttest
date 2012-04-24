@@ -1,3 +1,4 @@
+Use x-terminal-emulator as the default terminal emulator
 --- a/etc/cfg_notioncore.lua
 +++ b/etc/cfg_notioncore.lua
 @@ -143,7 +143,7 @@

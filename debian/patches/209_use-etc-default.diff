@@ -1,3 +1,4 @@
+Allow for custom configuration in /etc/default/notion
 --- a/etc/cfg_notion.lua
 +++ b/etc/cfg_notion.lua
 @@ -16,6 +16,8 @@

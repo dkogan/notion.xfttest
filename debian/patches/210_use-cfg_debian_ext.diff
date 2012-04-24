@@ -1,3 +1,4 @@
+Allow for extra configuration files
 --- a/etc/cfg_defaults.lua
 +++ b/etc/cfg_defaults.lua
 @@ -11,3 +11,6 @@
