@@ -1,12 +1,12 @@
 ion3 (20070506-1) unstable; urgency=low
 
-  * Ion3 is now in the non-free section due to a trademark claim and
-    conditions on the use of its name.
+  Ion3 is now in the non-free section due to a trademark claim and
+  conditions on the use of its name.
   
-  * The change in behaviour of the frame context menu in 20070318 has
-    been reverted.
+  The change in behaviour of the frame context menu in 20070318 has
+  been reverted.
 
-  * Other significant changes are listed in RELNOTES.gz.
+  Other significant changes are listed in RELNOTES.gz.
 
  -- Ben Hutchings <ben@decadent.org.uk>  Wed, 16 May 2007 23:54:29 +0100
 
