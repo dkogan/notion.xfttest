@@ -1,3 +1,4 @@
+Drop from the build procedure. This should eventually propagate to upstream.
 --- a/Makefile
 +++ b/Makefile
 @@ -12,7 +12,7 @@

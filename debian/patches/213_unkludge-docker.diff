@@ -1,3 +1,5 @@
+Put 'Docker' in the 'systray' status bar. This should be eventually included 
+upstream.
 --- a/etc/cfg_kludges.lua
 +++ b/etc/cfg_kludges.lua
 @@ -26,6 +26,13 @@
