@@ -7,16 +7,15 @@ Build-Depends: debhelper (>= 7), pkg-config, quilt, lua5.1, liblua5.1-0-dev, lib
 XS-Autobuild: yes
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/notion.git
 Vcs-Git: git://git.debian.org/collab-maint/notion.git
+Homepage: http://notion.sourceforge.net/
 
 Package: notion
-Section: non-free/x11
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}, xterm | x-terminal-emulator, x11-utils
 Recommends: xfonts-75dpi | xfonts-75dpi-transcoded | xfonts-100dpi | xfonts-100dpi-transcoded, libxrandr2, libxinerama1
 Suggests: menu (>= 2.1.9), docker, notion-doc, notion-scripts
 Provides: x-window-manager, notion-api-${Notion:ApiVersion}
 Replaces: particleman
-Homepage: http://notion.sourceforge.net/
 Description: tiling tabbed window manager designed for keyboard users
  Notion divides the screen into tiles and places windows in these tiles
  by default.  Each tile has a set of tabs for the windows within it.
@@ -28,7 +27,6 @@ Description: tiling tabbed window manager designed for keyboard users
 
 Package: notion-dev
 Section: non-free/devel
-Priority: extra
 Architecture: all
 Depends: ${misc:Depends}, libx11-dev, libsm-dev, lua5.1, gcc (>> 3)
 Description: Notion development files
