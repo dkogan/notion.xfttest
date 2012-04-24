@@ -21,7 +21,7 @@ Directory to search for configuration files and other scripts
 .TP
 .B \-oneroot
 On X servers with multiple (traditional non-Xinerama) screens, manage only
-default screen (root window), not all, as given by the -display option or
+default screen (root window), not all, as given by the \-display option or
 in the DISPLAY environment variable.
 .TP
 .B \-session session_name
@@ -151,8 +151,8 @@ User default main configuration file (overrides system default)
 .SH SEE ALSO
 The Notion home page, \fIhttp://notion.sf.net/\fP
 .PP
-The document "Configuring and extending Notion with Lua" found on the
-Notion home page.
+The document "Configuring and extending Notion with Lua" found in the
+notion-doc package.
 .PP
 .I DOCDIR/
 .PP
