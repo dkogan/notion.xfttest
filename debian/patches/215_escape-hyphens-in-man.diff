@@ -1,0 +1,35 @@
+Properly escape hyphens in man pages. This should be eventually included 
+upstream.
+--- a/man/notion.cs.in
++++ b/man/notion.cs.in
+@@ -22,7 +22,7 @@
+ .B \-oneroot
+ Na X serverech s více obrazovkami (ne-Xinerama) bude spravovat pouze výchozí
+ obrazovku (koøenové okno). (Tedy ne v¹echny, které byly zadány v parametru
+--display nebo v promìnné DISPLAY.)
++\-display nebo v promìnné DISPLAY.)
+ .TP
+ .B \-session název_sezení
+ Nastaví název sezení. Tato volba ovlivní, kam se ulo¾í pracovní plochy
+--- a/man/notion.fi.in
++++ b/man/notion.fi.in
+@@ -22,7 +22,7 @@
+ .TP
+ .B \-oneroot
+ Hallitse vain oletusnäyttöä X-palvelimilla, joissa on useampi perinteinen
+-(ei Xinerama) näyttö/juuri-ikkuna. Tämä näyttö voidaan valita -display
++(ei Xinerama) näyttö/juuri-ikkuna. Tämä näyttö voidaan valita \-display
+ parametrillä tai DISPLAY ympäristömuuttujalla.
+ .TP
+ .B \-session session_name
+--- a/man/notion.in
++++ b/man/notion.in
+@@ -21,7 +21,7 @@
+ .TP
+ .B \-oneroot
+ On X servers with multiple (traditional non-Xinerama) screens, manage only
+-default screen (root window), not all, as given by the -display option or
++default screen (root window), not all, as given by the \-display option or
+ in the DISPLAY environment variable.
+ .TP
+ .B \-session session_name
