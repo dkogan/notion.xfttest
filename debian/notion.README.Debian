@@ -15,7 +15,7 @@ Docks and system trays
 ----------------------
 
 Notion is compatible with the docking protocols used by WindowMaker and
-KDE.  It can place docked applications windows either in a corner
+KDE. It can place docked applications windows either in a corner
 dock, or in a "system tray" in the status bar.
 
 For a corner dock, add:
@@ -74,16 +74,5 @@ installed under /etc/X11/notion.  Run "install-notion-cfg cfg_foo" in the
 postinst script to add the configuration file
 /etc/X11/notion/cfg_foo.lua.  Run "install-notion-cfg --remove cfg_foo" in
 the prerm script to remove it.
-
-Compatibility with Flash full-screen mode
------------------------------------------
-
-The official Flash plugin (flashplugin-nonfree) can open full-screen
-windows.  Version 9 has a bug in this feature which causes these windows
-to close immediately if they are managed by Notion.  This package includes
-a workaround, but it is ugly and is not enabled by default.  If you
-need it, add this to cfg_notion.lua:
-
-    dopath("cfg_kludge_flash")
 
  -- Ben Hutchings <ben@decadent.org.uk>  Thu, 07 Feb 2008 20:35:27 +0000
