@@ -1,0 +1,13 @@
+--- a/system.mk
++++ b/system.mk
+@@ -176,8 +176,8 @@
+ 	-Wtrigraphs -Wformat -Wchar-subscripts \
+ 	-Wparentheses -pedantic -Wuninitialized
+ 
+-CFLAGS=-Os $(WARN) $(DEFINES) $(INCLUDES) $(EXTRA_INCLUDES)
+-LDFLAGS=-Wl,--as-needed $(LIBS) $(EXTRA_LIBS) 
++CFLAGS=-Os $(WARN) $(DEFINES) $(INCLUDES) $(EXTRA_INCLUDES) $(shell dpkg-buildflags --get CFLAGS) $(shell dpkg-buildflags --get CPPFLAGS)
++LDFLAGS=-Wl,--as-needed $(LIBS) $(EXTRA_LIBS) $(shell dpkg-buildflags --get LDFLAGS)
+ EXPORT_DYNAMIC=-Xlinker --export-dynamic
+ 
+ # The following options are mainly for development use and can be used
