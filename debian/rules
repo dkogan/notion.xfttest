@@ -110,7 +110,7 @@ binary-arch: build-arch install-arch
 	dh_installchangelogs -a
 	dh_installdocs -a
 	rm -f $(INSTDIR)/usr/share/doc/$(PACKAGE)/LICENSE
-	mv $(INSTDIR)/usr/share/doc/$(PACKAGE)/ChangeLog $(INSTDIR)/usr/share/doc/$(PACKAGE)/changelog
+#	mv $(INSTDIR)/usr/share/doc/$(PACKAGE)/ChangeLog $(INSTDIR)/usr/share/doc/$(PACKAGE)/changelog
 #	dh_installexamples -a
 #	dh_install -a
 	dh_installmenu -a
