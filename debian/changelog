@@ -16,6 +16,8 @@ notion (3+2012042300-1) unstable; urgency=low
   * Add descriptions for patches
   * Drop empty lintian/overrides directories
   * Fix unescaped hyphen in manpages
+  * Remove outdated Flash fullscreen kludge
+  * Add hardening options to build process
 
  -- Arnout Engelen <arnouten@bzzt.net>  Mon, 23 Apr 2012 19:18:20 +0200
 
