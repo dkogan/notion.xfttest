@@ -1,3 +1,4 @@
+Has_system.aprintf.diff
 201_build-config.diff
 205_notion-lock.diff
 206_use-x-terminal-emulator.diff
@@ -9,3 +10,4 @@
 214_drop_pwm.diff
 215_escape-hyphens-in-man.diff
 216_hardening-flags.diff
+217_has_system_printf.diff

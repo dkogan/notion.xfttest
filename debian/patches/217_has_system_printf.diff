@@ -1,0 +1,14 @@
+Declare we can just use printf functions from glibc - the 'portable' 
+implementation causes problems on some recent Debian sid systems and is ugly 
+anyway. We should consider making this the default.
+--- a/system.mk
++++ b/system.mk
+@@ -146,7 +146,7 @@
+ # You may uncomment this if you know that your system C libary provides
+ # asprintf and  vasprintf. (GNU libc does.) If HAS_SYSTEM_ASPRINTF is not
+ # defined, an implementation provided in libtu/sprintf_2.2/ is used. 
+-#HAS_SYSTEM_ASPRINTF=1
++HAS_SYSTEM_ASPRINTF=1
+ 
+ # The following setting is needed with GNU libc for clock_gettime and the
+ # monotonic clock. Other systems may not need it, or may not provide a
