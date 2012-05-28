@@ -164,10 +164,11 @@ version 2.1 of the License, or (at your option) any later version.
 
 ---
 
-Notion includes an implementation of snprintf which is licensed under
-the "Frontier Artistic License Version 1.0".  This code is not
-included in the Debian binary packages.  In the source package, the
-license text can be found in libtu/snprintf_2.2/LICENSE.txt.
+The Notion source includes an implementation of snprintf which is copyright
+Copyright © 1999, 2000 Mark Martinec <mark.martinec@ijs.si>, and licensed 
+under the "Frontier Artistic License Version 1.0".  This code is not included 
+in the Debian binary packages.  In the source package, the license text can be
+found in libtu/snprintf_2.2/LICENSE.txt.
 
 ---
 
