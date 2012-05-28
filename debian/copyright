@@ -9,7 +9,7 @@ Tommi Virtanen <tv@debian.org>.  It uses source from:
 
   http://notion.sf.net
 
-The author of Notion is the Notion Team, see http://notion.sf.net
+The author of Notion is the Notion Team, see http://notion.sf.net. 
 
 --
 
@@ -21,7 +21,11 @@ the control file and notify <nonfree@release.debian.net>.
 ---
 
 The following notice applies to the Notion code and to the names "Ion",
-"Ion3", etc.:
+"Ion3", etc.. This does not include the code in the 'contrib' directory, see
+below for more information. All code included in this package that has been 
+contributed after the name change to 'Notion' is dual-licensed under the 
+'normal' LGPL in addition to being released under the following notice:
+
 
 Copyright (c) Tuomo Valkonen 1999-2008.
 
@@ -153,6 +157,29 @@ the GNU LGPL; see README.rb for details.
 
 ---
 
+libextl, a library included in Notion, is released under the terms of the
+LGPL, version 2.1.
+
+---
+
+install-sh, included in libextl, includes the following notice:
+
+This comes from X11R5 (mit/util/scripts/install.sh).
+
+Copyright 1991 by the Massachusetts Institute of Technology
+
+Permission to use, copy, modify, distribute, and sell this software and its
+documentation for any purpose is hereby granted without fee, provided that
+the above copyright notice appear in all copies and that both that
+copyright notice and this permission notice appear in supporting
+documentation, and that the name of M.I.T. not be used in advertising or
+publicity pertaining to distribution of the software without specific,
+written prior permission.  M.I.T. makes no representations about the
+suitability of this software for any purpose.  It is provided "as is"
+without express or implied warranty.
+
+---
+
 The following notice applies to the red-black tree code in libtu:
 
 Copyright (C) 2000 James S. Plank
@@ -220,6 +247,19 @@ since Lukas' contributions were originally under that.
 
 ---
 
+The following applies to the 'frame-tabs-recalc' code:
+
+Copyright (c) Tomas Ebenlendr 2011
+
+---
+
+The folloing applies to the 'modules' code:
+
+Copyright (c) Arnout Engelen 2011
+Copyright (c) Tuomo Valkonen 1999-2009.
+
+---
+
 The following notice applies to the Czech translation of Notion:
 
 Copyright (c) Miroslav Kure 2004,2005,2006,2007.
@@ -249,6 +289,84 @@ This document is free; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free
 Software Foundation; either version 2 of the License, or (at your
 option) any later version.
+
+---
+
+The scripts in the 'contrib' directory are third-party contributions which are
+not an official part of Notion. The are currently not included in the binary 
+Debian packages. These files are in the public domain or distributable under
+terms as found in each file. In particular:
+
+contrib/statusd/statusd_laptopstatus.lua
+  Copyright (C) 2005 Jari Eskelinen <jari.eskelinen@iki.fi>
+contrib/statusd/statusd_binclock.lua
+contrib/statusd/statusd_flashing.lua
+contrib/statusd/statusd_nmaild.lua
+contrib/statusd/statusd_mem.lua
+  Copyright (C) 2006 Mario GarcÃ­a H., GPL2
+contrib/statusd/statusd_bsdbatt.lua
+  Copyright (c) 2005 Russell A. Jackson
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+    1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+    
+    THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+    OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+    HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+    LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+    OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+    SUCH DAMAGE.
+contrib/statusd/statusd_iface.lua
+contrib/statusd/statusd_inetaddr.lua
+contrib/statusd/statusd_batt.lua
+contrib/statusd/statusd_iwinfo.lua
+contrib/statusd/statusd_cpuspeed.lua
+  Copyright (c) Relu Patrascu 2004
+contrib/statusd/statusd_weather.lua
+contrib/scripts/stock.lua
+contrib/scripts/weather.lua
+  Copyright (C) 2006  Andrea Rossato arossato AT istitutocolli DOT org
+contrib/statusd/statusd_maildir.lua
+  Copyright (c) 2005 Brett Parker <iDunno@sommitrealweird.co.uk>
+contrib/statusd/statusd_exec.lua
+contrib/statusbar/statusbar_external.lua
+  Copyright (c) Antti Vähäkotamäki 2005.
+contrib/statusbar/statusbar_act.lua
+contrib/statusbar/statusbar_wsname.lua
+contrib/scripts/nowarp_scratchpad.lua
+contrib/scripts/net_client_list.lua
+contrib/scripts/named_scratchpad.lua
+contrib/scripts/frame_client_menu.lua
+contrib/scripts/show_submap.lua
+  Copyright (c) Etan Reisner 2007
+contrib/statusbar/statusbar_fname.lua
+  Copyright (c) Emanuele Giaquinta 2007
+contrib/scripts/xinerama_switcher.lua
+  (c) copyright 2005 by martin f. krafft <madduck@madduck.net>
+contrib/scripts/query_url.lua
+  (c) Reuben Thomas 2005 (rrt@sc3d.org)
+  released under the GPL
+contrib/scripts/xkbion.lua
+  (c) Sergey Redin <sergey at redin.info>
+
+
+
+
+
+
+
+
+
 
 ---
 
