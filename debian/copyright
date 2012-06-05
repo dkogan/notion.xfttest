@@ -248,6 +248,18 @@ option) any later version.
 
 ---
 
+The following notice applies to the xrandr module:
+
+Copyright (C) 2004 Ragnar Rova
+              2005-2007 Tuomo Valkonen
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+---
+
 The GNU Lesser General Public License can be found in
 /usr/share/common-licenses/LGPL-2.1 on Debian systems.
 
