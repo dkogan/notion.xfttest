@@ -262,14 +262,14 @@ This code is not included in the Debian binary packages.
 ---
 
 The following notice applies to the document "Configuring and
-extending with Lua":
+extending Notion with Lua":
 
-Copyright © 2003-2007 Tuomo Valkonen.
+Copyright © 2003-2009 Tuomo Valkonen.
 
-This document is free; you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free
-Software Foundation; either version 2 of the License, or (at your
-option) any later version.
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2 published by 
+the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, 
+and no Back-Cover Texts.
 
 ---
 
