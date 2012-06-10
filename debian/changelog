@@ -19,6 +19,7 @@ notion (3+2012042300-1) unstable; urgency=low
   * Remove outdated Flash fullscreen kludge
   * Add hardening options to build process
   * Use system printf functions instead of builtin 'portable' implementation
+  * Bring debian/copyright further up-to-date
 
  -- Arnout Engelen <arnouten@bzzt.net>  Mon, 23 Apr 2012 19:18:20 +0200
 
