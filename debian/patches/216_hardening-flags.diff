@@ -1,3 +1,9 @@
+Use dpkg-buildflags, which introduces hardening/fortify flags.
+
+Note that lintian still complains some .so's are not fortified, but it looks 
+like this is a false positive.
+
+This should eventually make its way in the default build procedure.
 --- a/system.mk
 +++ b/system.mk
 @@ -176,8 +176,8 @@
