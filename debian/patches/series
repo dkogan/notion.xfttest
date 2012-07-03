@@ -10,3 +10,4 @@
 215_escape-hyphens-in-man.diff
 216_hardening-flags.diff
 217_system_has_sprintf.diff
+218_drop_changelog.diff

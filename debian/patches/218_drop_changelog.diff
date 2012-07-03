@@ -1,0 +1,12 @@
+Don't include the empty upstream changelog.
+--- a/Makefile
++++ b/Makefile
+@@ -16,7 +16,7 @@
+ 
+ SUBDIRS = $(LIBS_SUBDIRS) $(INSTALL_SUBDIRS)
+ 
+-DOCS = README LICENSE ChangeLog RELNOTES
++DOCS = README LICENSE RELNOTES
+ 
+ TO_REALCLEAN = build/ac/system-ac.mk
+ 
