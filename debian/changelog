@@ -1,6 +1,6 @@
 notion (3+2012042300-2) unstable; urgency=low
 
-  * remove etc/X11/notion/cfg_debian_ext.lua on purge (closes 679764)
+  * remove etc/X11/notion/cfg_debian_ext.lua on purge (closes: #679764)
 
  -- Arnout Engelen <arnouten@bzzt.net>  Sun, 01 Jul 2012 16:06:02 +0200
 
