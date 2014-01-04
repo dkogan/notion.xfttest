@@ -1,6 +1,7 @@
 notion (3+2014010402-1) UNRELEASED; urgency=medium
 
   * New upstream version (closes: #725388)
+  * lua5.2 support
 
  -- Arnout Engelen <arnouten@jaga.bzzt.net>  Sat, 04 Jan 2014 21:08:30 +0100
 

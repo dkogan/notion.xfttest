@@ -3,7 +3,7 @@ Section: non-free/x11
 Priority: extra
 Maintainer: Arnout Engelen <arnouten@bzzt.net>
 Standards-Version: 3.9.3
-Build-Depends: debhelper (>= 7), pkg-config, lua5.1, liblua5.1-0-dev, libx11-dev, libxext-dev, libsm-dev, libxinerama-dev, libxrandr-dev
+Build-Depends: debhelper (>= 7), pkg-config, lua5.2, liblua5.2-dev, libx11-dev, libxext-dev, libsm-dev, libxinerama-dev, libxrandr-dev
 XS-Autobuild: yes
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/notion.git
 Vcs-Git: git://git.debian.org/collab-maint/notion.git
@@ -28,7 +28,7 @@ Description: tiling tabbed window manager designed for keyboard users
 Package: notion-dev
 Section: non-free/devel
 Architecture: all
-Depends: ${misc:Depends}, libx11-dev, libsm-dev, lua5.1, gcc (>> 3)
+Depends: ${misc:Depends}, libx11-dev, libsm-dev, lua5.2, gcc (>> 3)
 Description: Notion development files
  Notion divides the screen into tiles and places windows in these tiles
  by default.  Each tile has a set of tabs for the windows within it.
