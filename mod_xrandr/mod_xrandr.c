@@ -38,6 +38,8 @@
 #include <ioncore/xwindow.h>
 #include <ioncore/../version.h>
 
+#include "exports.h"
+
 char mod_xrandr_ion_api_version[]=ION_API_VERSION;
 
 WHook *randr_screen_change_notify=NULL;
@@ -177,7 +179,7 @@ bool mod_xrandr_init()
 
     INIT_HOOK_(randr_screen_change_notify);
     
-    return TRUE;
+    return mod_xrandr_register_exports();
 }
 
 
@@ -188,3 +190,83 @@ bool mod_xrandr_deinit()
     
     return TRUE;
 }
+
+void add_output(ExtlTab result, XRROutputInfo *output_info, XRRCrtcInfo *crtc_info)
+{
+    ExtlTab details = extl_create_table();
+    /* TODO we probably have to strdup the outputs' data here, because we free
+     * the XRROutputInfo later on. However, where can we make sure the strings
+     * get freed when the code calling mod_xrandr_get_outputs_for_geom is done
+     * with it?
+     */
+    extl_table_sets_s(details, "name", strdup(output_info->name));
+    extl_table_sets_i(details, "x", crtc_info->x);
+    extl_table_sets_i(details, "y", crtc_info->y);
+    extl_table_sets_i(details, "w", (int)crtc_info->width);
+    extl_table_sets_i(details, "h", (int)crtc_info->height);
+    extl_table_sets_t(result, strdup(output_info->name), details);
+}
+
+EXTL_SAFE
+EXTL_EXPORT
+ExtlTab mod_xrandr_get_all_outputs()
+{
+    int i;
+    XRRScreenResources *res = XRRGetScreenResources(ioncore_g.dpy, ioncore_g.rootwins->dummy_win);
+    ExtlTab result = extl_create_table();
+   
+    for(i=0; i < res->noutput; i++){
+        int x,y;
+        int w,h;
+        XRROutputInfo *output_info = XRRGetOutputInfo(ioncore_g.dpy, res, res->outputs[i]);
+        if(output_info->crtc != None){
+            XRRCrtcInfo *crtc_info = XRRGetCrtcInfo(ioncore_g.dpy, res, output_info->crtc);
+        
+            add_output(result, output_info, crtc_info);
+
+            XRRFreeCrtcInfo(crtc_info);
+        }
+        XRRFreeOutputInfo(output_info);
+    }
+    
+    return result;
+
+}
+
+/*EXTL_DOC
+ * Queries the RandR extension for outputs with this geometry
+ *
+ * Returns a table with the matching RandR window names as keys
+ */
+EXTL_SAFE
+EXTL_EXPORT
+ExtlTab mod_xrandr_get_outputs_for_geom(ExtlTab geom)
+{
+    int i;
+    XRRScreenResources *res = XRRGetScreenResources(ioncore_g.dpy, ioncore_g.rootwins->dummy_win);
+    ExtlTab result = extl_create_table();
+   
+    for(i=0; i < res->noutput; i++){
+        int x,y;
+        int w,h;
+        XRROutputInfo *output_info = XRRGetOutputInfo(ioncore_g.dpy, res, res->outputs[i]);
+        if(output_info->crtc != None){
+            XRRCrtcInfo *crtc_info = XRRGetCrtcInfo(ioncore_g.dpy, res, output_info->crtc);
+        
+            extl_table_gets_i(geom, "x", &x);
+            extl_table_gets_i(geom, "y", &y);
+            extl_table_gets_i(geom, "w", &w);
+            extl_table_gets_i(geom, "h", &h);
+            if(x==crtc_info->x && y==crtc_info->y
+               && w==(int)crtc_info->width && h==(int)crtc_info->height){
+                add_output(result, output_info, crtc_info);
+            }
+
+            XRRFreeCrtcInfo(crtc_info);
+        }
+        XRRFreeOutputInfo(output_info);
+    }
+    
+    return result;
+}
+

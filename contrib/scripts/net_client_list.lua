@@ -1,3 +1,7 @@
+-- Authors: Etan Reisner <deryni@gmail.com>
+-- License: MIT, see http://opensource.org/licenses/mit-license.php
+-- Last Changed: 2007-07-22
+--
 --[[
 Author: Etan Reisner
 Email: deryni@unreliablesource.net
@@ -5,6 +9,9 @@ Summary: Maintains the _NET_CLIENT_LIST property (and the _NET_CLIENT_LIST_STACK
 Last Updated: 2007-07-22
 
 Copyright (c) Etan Reisner 2007
+
+This software is released under the terms of the MIT license. For more
+information, see http://opensource.org/licenses/mit-license.php .
 --]]
 
 local atom_window = ioncore.x_intern_atom("WINDOW", false)

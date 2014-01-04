@@ -1,3 +1,7 @@
+-- Authors: Tibor Csögör <tibi@tiborius.net>
+-- License: Public domain
+-- Last Changed: 2007-03-10
+--
 -- $Id: statusd_cpustat.lua 80 2007-03-10 00:16:09Z tibi $
 
 -- statusd_cpustat.lua -- CPU monitor for Ion3's statusbar
@@ -67,7 +71,7 @@ local function get_cpustat()
    end
 
    local c = {}
-   for i = 1, table.getn(t) do
+   for i = 1, #(t) do
       table.insert(c, math.round(((current_stat[i] - last_stat[i])
 				  / uptime_interv) * 100))
    end

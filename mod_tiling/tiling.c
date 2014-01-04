@@ -138,6 +138,20 @@ void tiling_managed_rqgeom(WTiling *ws, WRegion *mgd,
         splittree_rqgeom((WSplit*)node, rq->flags, &rq->geom, geomret);
 }
 
+bool tiling_managed_maximize(WTiling *ws, WRegion *mgd, int dir, int action)
+{
+    WSplitRegion *node=get_node_check(ws, mgd);
+    bool ret;
+    if(node!=NULL && ws->split_tree!=NULL){
+        ret=split_maximize((WSplit*)node, dir, action);
+        if(action==RESTORE && ret)
+            split_regularise_stdisp(ws->stdispnode);
+        return ret;
+    }
+    else
+        return FALSE;
+}
+
 
 void tiling_map(WTiling *ws)
 {
@@ -161,7 +175,7 @@ void tiling_unmap(WTiling *ws)
 
 void tiling_fallback_focus(WTiling *ws, bool warp)
 {
-    region_finalise_focusing((WRegion*)ws, ws->dummywin, warp, CurrentTime);
+    region_finalise_focusing((WRegion*)ws, ws->dummywin, warp, CurrentTime, TRUE);
 }
 
 
@@ -528,7 +542,7 @@ bool tiling_do_attach_initial(WTiling *ws, WRegion *reg)
 
 static WRegion *create_frame_tiling(WWindow *parent, const WFitParams *fp)
 {
-    return (WRegion*)create_frame(parent, fp, FRAME_MODE_TILED);
+    return (WRegion*)create_frame(parent, fp, FRAME_MODE_TILED, "Tiling Frame");
 }
 
 
@@ -1691,6 +1705,9 @@ static DynFunTab tiling_dynfuntab[]={
     {region_managed_rqgeom, 
      tiling_managed_rqgeom},
     
+    {(DynFun*)region_managed_maximize,
+     (DynFun*)tiling_managed_maximize},
+
     {region_managed_remove, 
      tiling_managed_remove},
     

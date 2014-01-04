@@ -1,3 +1,7 @@
+-- Authors: Reuben Thomas <rrt@sc3d.org>
+-- License: GPL, version 2
+-- Last Changed: 2005
+--
 -- Prompt for a URL and open it
 -- Use Opera bookmarks for completion
 -- (c) Reuben Thomas 2005 (rrt@sc3d.org); released under the GPL
@@ -38,7 +42,7 @@ function readOperaBookmarks ()
         -- TODO: Make the name and stripped URL processing below
         -- independent of browsing Opera's bookmarks, and add other
         -- bookmark formats
-        local urlIndex = table.getn (bookmarks)
+        local urlIndex = # (bookmarks)
         names[name] = urlIndex
         table.insert (bookmarks, name)
         local strippedUrl = string.gsub (url, "^https?://", "")

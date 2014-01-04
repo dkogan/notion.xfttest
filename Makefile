@@ -2,7 +2,7 @@
 ## Notion Makefile
 ##
 
-# System-specific configuration is in system.mk
+# Include system-specific configuration: auto-generated and optionally local 
 include build/system-inc.mk
 
 # List of modules
@@ -12,7 +12,7 @@ include modulelist.mk
 
 INSTALL_SUBDIRS=\
 	$(MODULE_LIST) \
-	ioncore notion pwm etc utils man po
+	ioncore notion etc utils man po
 
 SUBDIRS = $(LIBS_SUBDIRS) $(INSTALL_SUBDIRS)
 
@@ -20,7 +20,7 @@ DOCS = README LICENSE ChangeLog RELNOTES
 
 TO_REALCLEAN = build/ac/system-ac.mk
 
-POTFILE=po/ion.pot
+POTFILE=po/notion.pot
 
 ######################################
 
@@ -36,3 +36,33 @@ _install:
 
 relocatable_build:
 	$(MAKE) RELOCATABLE=1 PREFIX=
+
+snapshot:
+	PWD=`pwd` ;\
+	DIR=`basename "$$PWD"` ;\
+	RELEASE=`./nextversion.sh`-snapshot ;\
+	perl -p -i -e "s/^#define NOTION_RELEASE.*/#define NOTION_RELEASE \"$$RELEASE\"/" version.h ;\
+	cd .. ;\
+	tar --exclude-vcs -czf notion-$$RELEASE-src.tar.gz $$DIR ;\
+	tar --exclude-vcs -cjf notion-$$RELEASE-src.tar.bz2 $$DIR ;\
+	cd $$DIR ;\
+	git checkout version.h
+
+dist:
+	PWD=`pwd` ;\
+	DIR=`basename "$$PWD"` ;\
+	RELEASE=`./nextversion.sh` ;\
+	perl -p -i -e "s/^#define NOTION_RELEASE.*/#define NOTION_RELEASE \"$$RELEASE\"/" version.h ;\
+	git tag $$RELEASE ; git push --tags ;\
+	cd .. ;\
+	tar --exclude-vcs -czf notion-$$RELEASE-src.tar.gz $$DIR ;\
+	tar --exclude-vcs -cjf notion-$$RELEASE-src.tar.bz2 $$DIR ;\
+	cd $$DIR ;\
+	git checkout version.h
+
+.PHONY: test
+
+test:
+	$(MAKE) -C mod_xrandr test
+	$(MAKE) -C mod_xinerama test
+	$(MAKE) -C test

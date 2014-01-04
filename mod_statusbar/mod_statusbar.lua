@@ -270,7 +270,7 @@ function mod_statusbar.launch_statusd(cfg)
 
     local cfg=mod_statusbar.cfg_statusd(cfg or {})
     local params=""
-    table.foreach(mods, function(k) params=params.." -m "..k end)
+    for k in pairs(mods) do params=params.." -m "..k end
     local cmd=statusd.." -c "..cfg..params
     
     local rcv=coroutine.wrap(mod_statusbar.rcv_statusd)
@@ -342,6 +342,22 @@ function mod_statusbar.create(param)
     
     return sb
 end
+
+--DOC
+-- Function to terminate \file{ion-statusd} on exit or reload. Should
+-- be called from hook \var{deinit}.
+function mod_statusbar.terminate_statusd()
+    if statusd_pid==0 then
+        return
+    end
+
+    mod_statusbar._terminate_statusd(statusd_pid)
+
+    statusd_pid=0
+end
+
+-- Establish hook
+ioncore.get_hook("ioncore_deinit_hook"):add(mod_statusbar.terminate_statusd)
 
 -- }}}
 

@@ -1,3 +1,7 @@
+-- Authors: Etan Reisner <deryni@gmail.com>
+-- License: MIT, see http://opensource.org/licenses/mit-license.php
+-- Last Changed: 2007-01-23
+--
 --[[
 Author: Etan Reisner
 Email: deryni@gmail.com
@@ -6,6 +10,9 @@ Version: 0.6
 Last Updated: 2007-01-23
 
 Copyright (c) Etan Reisner 2007
+
+This software is released under the terms of the MIT license. For more
+information, see http://opensource.org/licenses/mit-license.php .
 --]]
 
 -- Usage:
@@ -108,6 +115,8 @@ local function get_ws_name(t)
         else
             ws_names_all = ws_names_all..wsname.all_marker..ws_names
         end
+
+        return true
     end
 
     ioncore.region_i(inform, "WScreen")

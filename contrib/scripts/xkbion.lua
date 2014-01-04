@@ -1,7 +1,13 @@
+-- Authors: Sergey Redin <sergey@redin.info>
+-- License: Public domain
+-- Last Changed: Unknown
+-- 
 -- xkbion.lua
 -- TODO: make xkbion_set understand some simple presets
 
--- (c) Sergey Redin <sergey at redin.info>
+-- Author: Sergey Redin <sergey at redin.info>
+-- This software is in the public domain.
+--
 -- Thanks:
 -- smersh at users.sf.net (author of xkbind) for the original idea
 

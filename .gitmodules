@@ -1,0 +1,6 @@
+[submodule "libextl"]
+	path = libextl
+	url = ../libextl
+[submodule "libtu"]
+	path = libtu
+	url = ../libtu

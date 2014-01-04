@@ -4,7 +4,7 @@
 ##
 
 # System specific configuration is in system.mk
-TOPDIR=../
+TOPDIR=..
 include $(TOPDIR)/build/system-inc.mk
 
 ######################################
@@ -14,9 +14,11 @@ CFLAGS += $(XOPEN_SOURCE) $(C99_SOURCE)
 
 SOURCES=mod_xrandr.c
 
-MAKE_EXPORTS=xrandr_module
+MAKE_EXPORTS=mod_xrandr
 LIBS = $(X11_LIBS) -lXrandr
 MODULE=mod_xrandr
+MODULE_STUB=mod_xrandr.lua
+ETC=cfg_xrandr.lua
 
 ######################################
 
@@ -39,6 +41,10 @@ tarball: $(SOURCES) $(ETC) $(DOCS) Makefile
 		cp $+ $$BASENAME; \
 		tar -cvjf $$BASENAME.tar.bz2 $$BASENAME/*; \
 		rm -Rf $$BASENAME'
+
+.PHONY: test
+test: $(SOURCES)
+	for i in test_xrandr*.lua ; do echo 'Testing' $$i ; lua $$i ; done
 
 ######################################
 

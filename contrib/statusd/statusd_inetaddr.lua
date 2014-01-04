@@ -1,3 +1,7 @@
+-- Authors: Relu Patrascu <ikoflexer@gmail.com>
+-- License: LGPL, version 2.1 or later
+-- Last Changed: 2004-11-05
+--
 -- statusd_inetaddr.lua
 -- 
 -- Copyright (c) Relu Patrascu 2004.
@@ -64,7 +68,7 @@ local function get_inetaddr_ifcfg()
 	else
 		local ifconfig_info = f:read('*a')
 		f:close()
-		st,en,inetaddr = string.find(ifconfig_info, 'inet addr:(%d+\.%d+\.%d+\.%d+)')
+		st,en,inetaddr = string.find(ifconfig_info, 'inet addr:(%d+%.%d+%.%d+%.%d+)')
 		if not inetaddr then
 			inetaddr=""
 		end

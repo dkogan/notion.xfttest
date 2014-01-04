@@ -1,3 +1,7 @@
+-- Authors: Sadrul Habib Chowdhury <imadil@gmail.com>
+-- License: Public domain
+-- Last Changed: Unknown
+--
 -- look_atme.lua drawing engine configuration file for Ion.
 -- 
 -- Author: Sadrul Habib Chowdhury (Adil)

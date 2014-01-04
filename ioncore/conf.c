@@ -33,6 +33,12 @@ StringIntMap frame_idxs[]={
     END_STRINGINTMAP
 };
 
+StringIntMap win_stackrq[]={
+    {"ignore", IONCORE_WINDOWSTACKINGREQUEST_IGNORE},
+    {"activate",  IONCORE_WINDOWSTACKINGREQUEST_ACTIVATE},
+    END_STRINGINTMAP
+};
+
 static bool get_winprop_fn_set=FALSE;
 static ExtlFn get_winprop_fn;
 
@@ -85,6 +91,11 @@ static ExtlFn get_layout_fn;
  *  \var{autoraise} & (boolean) Autoraise regions in groups on goto. \\
  *  \var{usertime_diff_current} & (integer) Controls switchto timeout. \\
  *  \var{usertime_diff_new} & (integer) Controls switchto timeout. \\
+ *  \var{autosave_layout} & (boolean) Automatically save layout on restart and exit. \\
+ *  \var{window_stacking_request} & (string) How to respond to window-stacking
+ *                          requests. \codestr{ignore} to do nothing,
+ *                          \codestr{activate} to set the activity flag on a
+ *                          window requesting to be stacked Above. \\
  * \end{tabularx}
  * 
  * When a keyboard resize function is called, and at most \var{kbresize_t_max} 
@@ -110,6 +121,14 @@ void ioncore_set(ExtlTab tab)
     extl_table_gets_b(tab, "framed_transients", &(ioncore_g.framed_transients));
     extl_table_gets_b(tab, "unsqueeze", &(ioncore_g.unsqueeze_enabled));
     extl_table_gets_b(tab, "autoraise", &(ioncore_g.autoraise));
+    extl_table_gets_b(tab, "autosave_layout", &(ioncore_g.autosave_layout));
+
+    if(extl_table_gets_s(tab, "window_stacking_request", &tmp)){
+        ioncore_g.window_stacking_request=stringintmap_value(win_stackrq, 
+                                                         tmp,
+                                                         ioncore_g.window_stacking_request);
+        free(tmp);
+    }
     
     if(extl_table_gets_s(tab, "frame_default_index", &tmp)){
         ioncore_g.frame_default_index=stringintmap_value(frame_idxs, 
@@ -174,7 +193,12 @@ ExtlTab ioncore_get()
     extl_table_sets_b(tab, "framed_transients", ioncore_g.framed_transients);
     extl_table_sets_b(tab, "unsqueeze", ioncore_g.unsqueeze_enabled);
     extl_table_sets_b(tab, "autoraise", ioncore_g.autoraise);
-    
+    extl_table_sets_b(tab, "autosave_layout", ioncore_g.autosave_layout);
+
+    extl_table_sets_s(tab, "window_stacking_request", 
+                      stringintmap_key(win_stackrq, 
+                                       ioncore_g.window_stacking_request,
+                                       NULL));
 
     extl_table_sets_s(tab, "frame_default_index", 
                       stringintmap_key(frame_idxs, 
