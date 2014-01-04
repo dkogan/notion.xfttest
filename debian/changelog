@@ -1,3 +1,9 @@
+notion (3+2014010402-1) UNRELEASED; urgency=medium
+
+  * New upstream version (closes: #725388)
+
+ -- Arnout Engelen <arnouten@jaga.bzzt.net>  Sat, 04 Jan 2014 21:08:30 +0100
+
 notion (3+2012042300-2) unstable; urgency=low
 
   * remove etc/X11/notion/cfg_debian_ext.lua on purge (closes: #679764)

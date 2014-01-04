@@ -1,23 +1,23 @@
 Use x-terminal-emulator as the default terminal emulator
 --- a/etc/cfg_notioncore.lua
 +++ b/etc/cfg_notioncore.lua
-@@ -143,7 +143,7 @@
+@@ -152,7 +152,7 @@
      kpress(META.."F1", "ioncore.exec_on(_, ':man notion')"),
  
      bdoc("Run a terminal emulator."),
--    kpress(ALTMETA.."F2", "ioncore.exec_on(_, XTERM or 'xterm')"),
-+    kpress(ALTMETA.."F2", "notioncore.exec_on(_, XTERM or 'x-terminal-emulator')"),
+-    kpress(ALTMETA.."F2", "mod_query.exec_on_merr(_, XTERM or 'xterm')"),
++    kpress(ALTMETA.."F2", "mod_query.exec_on_merr(_, XTERM or 'x-terminal-emulator')"),
      
      bdoc("Query for command line to execute."),
      kpress(ALTMETA.."F3", "mod_query.query_exec(_)"),
-@@ -329,7 +329,7 @@
+@@ -341,7 +341,7 @@
  -- Main menu
  defmenu("mainmenu", {
      menuentry("Run...",         "mod_query.query_exec(_)"),
--    menuentry("Terminal",       "ioncore.exec_on(_, XTERM or 'xterm')"),
-+    menuentry("Terminal",       "notioncore.exec_on(_, XTERM or 'x-terminal-emulator')"),
-     menuentry("Lock screen",
-               "notioncore.exec_on(_, notioncore.lookup_script('notion-lock'))"),
+-    menuentry("Terminal",       "mod_query.exec_on_merr(_, XTERM or 'xterm')"),
++    menuentry("Terminal",       "mod_query.exec_on_merr(_, XTERM or 'x-terminal-emulator')"),
+     menuentry("Lock screen",    
+         "notioncore.exec_on(_, notioncore.lookup_script('notion-lock'))"),
      menuentry("Help",           "mod_query.query_man(_)"),
 --- a/utils/ion-runinxterm
 +++ b/utils/ion-runinxterm

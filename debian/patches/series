@@ -1,13 +1,8 @@
 201_build-config.diff
-205_notion-lock.diff
 206_use-x-terminal-emulator.diff
 209_use-etc-default.diff
 210_use-cfg_debian_ext.diff
 211_add-debian-menu.diff
 212_suggest-notion-doc.diff
-213_unkludge-docker.diff
-214_drop_pwm.diff
-215_escape-hyphens-in-man.diff
 216_hardening-flags.diff
-217_system_has_sprintf.diff
 218_drop_changelog.diff
