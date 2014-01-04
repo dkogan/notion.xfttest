@@ -1,3 +1,7 @@
+-- Authors: Sadrul Habib Chowdhury <imadil@gmail.com>
+-- License: Public domain
+-- Last Changed: Unknown
+--
 -- statusd_uptime.lua
 -- 
 -- Author

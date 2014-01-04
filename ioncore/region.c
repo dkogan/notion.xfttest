@@ -335,9 +335,37 @@ bool region_goto_flags(WRegion *reg, int flags)
  * actually have received the focus when this function returns.
  */
 EXTL_EXPORT_MEMBER
-bool region_goto(WRegion *reg)
+bool region_goto_focus(WRegion *reg)
 {
     return region_goto_flags(reg, REGION_GOTO_FOCUS);
+}
+
+/*EXTL_DOC
+ * Deprecated in favour of \fnref{WRegion.goto_focus} because 'goto' is a 
+ * keyword since Lua 5.2.
+ */
+EXTL_EXPORT_MEMBER
+bool region_goto(WRegion *reg)
+{
+    return region_goto_focus(reg);
+}
+
+/*
+ * Kept for backwards compatibility
+ */
+EXTL_EXPORT_MEMBER
+bool region_goto_(WRegion *reg)
+{
+    return region_goto_focus(reg);
+}
+
+/*
+ * Kept for backwards compatibility
+ */
+EXTL_EXPORT_MEMBER
+bool region_display(WRegion *reg)
+{
+    return region_goto_focus(reg);
 }
 
 
@@ -545,8 +573,6 @@ void region_detach_manager(WRegion *reg)
     if(mgr==NULL)
         return;
     
-    region_set_activity(reg, SETPARAM_UNSET);
-
     region_managed_remove(mgr, reg);
 
     assert(REGION_MANAGER(reg)==NULL);

@@ -1,3 +1,7 @@
+-- Authors: Andrea Rossato <arossato@istitutocolli.org>
+-- License: GPL, version 2 or later
+-- Last Changed: 2006-07-10
+-- 
 -- stock.lua
 
 -- ABOUT

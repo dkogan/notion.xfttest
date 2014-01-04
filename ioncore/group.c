@@ -147,6 +147,13 @@ bool group_fitrep(WGroup *ws, WWindow *par, const WFitParams *fp)
         
         if(ws->managed_stdisp!=NULL && ws->managed_stdisp->reg!=NULL)
             region_detach_manager(ws->managed_stdisp->reg);
+        else if(ws->bottom!=NULL && ws->bottom->reg!=NULL &&
+                HAS_DYN(ws->bottom->reg, region_unmanage_stdisp)){
+            /* Usually the stdisp will not be managed by the group itself, but
+             * rather by the WTiling managed by the group, see
+             * group_manage_stdisp. */
+            region_unmanage_stdisp(ws->bottom->reg, TRUE, TRUE);
+        }
         
         assert(ws->managed_stdisp==NULL);
         
@@ -245,7 +252,7 @@ static void group_do_set_focus(WGroup *ws, bool warp)
     if(st!=NULL && st->reg!=NULL)
         region_do_set_focus(st->reg, warp);
     else
-        region_finalise_focusing((WRegion*)ws, ws->dummywin, warp, CurrentTime);
+        region_finalise_focusing((WRegion*)ws, ws->dummywin, warp, CurrentTime, TRUE);
 }
 
 
@@ -354,7 +361,7 @@ void group_managed_notify(WGroup *ws, WRegion *reg, WRegionNotify how)
 /*{{{ Create/destroy */
 
 
-bool group_init(WGroup *ws, WWindow *par, const WFitParams *fp)
+bool group_init(WGroup *ws, WWindow *par, const WFitParams *fp, const char *name)
 {
     const char *p[1];
 
@@ -371,7 +378,7 @@ bool group_init(WGroup *ws, WWindow *par, const WFitParams *fp)
     if(ws->dummywin==None)
         return FALSE;
 
-    p[0] = "WGroup";
+    p[0] = name;
     xwindow_set_text_property(ws->dummywin, XA_WM_NAME, p, 1);
 
     region_init(&ws->reg, par, fp);
@@ -391,9 +398,9 @@ bool group_init(WGroup *ws, WWindow *par, const WFitParams *fp)
 }
 
 
-WGroup *create_group(WWindow *par, const WFitParams *fp)
+WGroup *create_group(WWindow *par, const WFitParams *fp, const char *name)
 {
-    CREATEOBJ_IMPL(WGroup, group, (p, par, fp));
+    CREATEOBJ_IMPL(WGroup, group, (p, par, fp, name));
 }
 
 
@@ -1311,7 +1318,7 @@ WRegion *region_groupleader_of(WRegion *reg)
 /*{{{ Save/load */
 
 
-static ExtlTab group_get_configuration(WGroup *ws)
+ExtlTab group_get_configuration(WGroup *ws)
 {
     ExtlTab tab, mgds, subtab, g;
     WStacking *st;
@@ -1396,11 +1403,12 @@ void group_do_load(WGroup *ws, ExtlTab tab)
 }
 
 
-WRegion *group_load(WWindow *par, const WFitParams *fp, ExtlTab tab)
+WRegion *group_loaj(WWindow *par, const WFitParams *fp, ExtlTab tab)
 {
     WGroup *ws;
-    
-    ws=create_group(par, fp);
+
+    /* Generic initial name - to be overwritten later. */
+    ws=create_group(par, fp, "Notion GroupCW or GroupWS");
     
     if(ws==NULL)
         return NULL;

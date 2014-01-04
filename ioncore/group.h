@@ -58,8 +58,8 @@ DECLCLASS(WGroup){
 };
 
 
-extern bool group_init(WGroup *grp, WWindow *parent, const WFitParams *fp);
-extern WGroup *create_group(WWindow *parent, const WFitParams *fp);
+extern bool group_init(WGroup *grp, WWindow *parent, const WFitParams *fp, const char *name);
+extern WGroup *create_group(WWindow *parent, const WFitParams *fp, const char *name);
 extern void group_deinit(WGroup *grp);
 
 extern WRegion *group_load(WWindow *par, const WFitParams *fp, 
@@ -110,6 +110,8 @@ extern WStacking *group_find_to_focus(WGroup *ws, WStacking *to_try);
 
 extern WRegion *region_groupleader_of(WRegion *reg);
 /*extern WRegion *region_group_of(WRegion *reg);*/
+
+extern ExtlTab group_get_configuration(WGroup *ws);
 
 
 typedef WStackingFilter WGroupIterFilter;

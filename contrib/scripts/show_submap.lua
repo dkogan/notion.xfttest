@@ -1,3 +1,7 @@
+-- Authors: Etan Reisner <deryni@gmail.com>
+-- License: MIT, see http://opensource.org/licenses/mit-license.php
+-- Last Changed: 2007-07-04
+--
 --[[
 Author: Etan Reisner
 Email: deryni@unreliablesource.net
@@ -6,6 +10,9 @@ Version: 0.1
 Last Updated: 2007-07-04
 
 Copyright (c) Etan Reisner 2007.
+
+This software is released under the terms of the MIT license. For more
+information, see http://opensource.org/licenses/mit-license.php .
 --]]
 
 local sswins = setmetatable({}, {__mode="kv"})

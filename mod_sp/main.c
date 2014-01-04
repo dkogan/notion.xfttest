@@ -55,7 +55,7 @@ char mod_sp_ion_api_version[]=NOTION_API_VERSION;
 static WRegion *create_frame_scratchpad(WWindow *parent, const WFitParams *fp,
                                         void *unused)
 {
-    return (WRegion*)create_frame(parent, fp, FRAME_MODE_UNKNOWN);
+    return (WRegion*)create_frame(parent, fp, FRAME_MODE_UNKNOWN, "Scratchpad Frame");
 }
 
 
@@ -142,6 +142,32 @@ static bool is_scratchpad(WRegion *reg)
                strncmp(nm, SPWS_NAME, inst_off)==0));
 }
 
+/*EXTL_DOC
+ * Is \var{reg} a scratchpad?
+ */
+EXTL_SAFE
+EXTL_EXPORT
+bool mod_sp_is_scratchpad(WRegion *reg)
+{
+    return is_scratchpad(reg);
+}
+
+/*EXTL_DOC
+ * Attempt to create a scratchpad on \var{scr}.
+ */
+EXTL_EXPORT
+bool mod_sp_create_scratchpad(WScreen *scr)
+{
+    WMPlexIterTmp tmp;
+    WRegion *reg;
+
+    FOR_ALL_MANAGED_BY_MPLEX((WMPlex*)scr, reg, tmp){
+        if(is_scratchpad(reg))
+            return TRUE;
+    }
+
+    return create(&scr->mplex, MPLEX_ATTACH_HIDDEN)!=NULL;
+}
 
 /*EXTL_DOC
  * Change displayed status of some scratchpad on \var{mplex} if one is 

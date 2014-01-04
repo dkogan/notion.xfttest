@@ -1,3 +1,7 @@
+-- Authors: Rene van Bevern <rvb@pro-linux.de>, Etan Reisner <deryni@gmail.com>
+-- License: Public domain
+-- Last Changed: Unknown
+-- 
 -- zoom.lua
 --
 -- exchanges current client window with the active client window of the frame
@@ -75,7 +79,7 @@ function zoom_client(curframe, curclient, options)
    if (not zoomframe) or (curframe == zoomframe) then
       return
    end
-   local zoomclient = zoomframe:lcurrent(1)
+   local zoomclient = zoomframe:mx_current()
    if curclient then
       zoomframe:attach(curclient)
    end

@@ -120,6 +120,9 @@ WScreen *create_screen(WRootWin *parent, const WFitParams *fp, int id)
 void screen_deinit(WScreen *scr)
 {
     UNLINK_ITEM(ioncore_g.screens, scr, next_scr, prev_scr);
+
+    screen_unnotify(scr);
+    screen_nowindowinfo(scr);
     
     mplex_deinit((WMPlex*)scr);
 }
@@ -232,18 +235,14 @@ EXTL_SAFE
 EXTL_EXPORT
 WScreen *ioncore_find_screen_id(int id)
 {
-    WScreen *scr, *maxscr=NULL;
+    WScreen *scr=NULL;
     
     FOR_ALL_SCREENS(scr){
-        if(id==-1){
-            if(maxscr==NULL || scr->id>maxscr->id)
-                maxscr=scr;
-        }
         if(scr->id==id)
             return scr;
     }
     
-    return maxscr;
+    return NULL;
 }
 
 
@@ -337,7 +336,7 @@ static WRegion *screen_managed_disposeroot(WScreen *scr, WRegion *reg)
     WLListNode *lnode;
     WLListIterTmp tmp;
     
-    if(OBJ_IS(reg, WGroupWS)){
+    if(scr==scr->prev_scr && OBJ_IS(reg, WGroupWS)){
         FOR_ALL_NODES_ON_LLIST(lnode, scr->mplex.mx_list, tmp){
             if(lnode->st->reg==reg){
                 onmxlist=TRUE;
@@ -348,7 +347,7 @@ static WRegion *screen_managed_disposeroot(WScreen *scr, WRegion *reg)
         }
 
         if(onmxlist && !others){
-            warn(TR("Only workspace may not be destroyed/detached."));
+            warn(TR("Only workspace on only screen may not be destroyed/detached."));
             return NULL;
         }
     }
@@ -359,8 +358,7 @@ static WRegion *screen_managed_disposeroot(WScreen *scr, WRegion *reg)
 
 static bool screen_may_dispose(WScreen *scr)
 {
-    warn(TR("Screens may not be destroyed."));
-    return FALSE;
+    return TRUE;
 }
 
 

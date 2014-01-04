@@ -1,4 +1,4 @@
--- Ion xinerama module - lua setup
+-- Notion xinerama module - lua setup
 -- 
 -- by Tomas Ebenlendr <ebik@ucw.cz>
 --
@@ -22,7 +22,7 @@
 -- confusing the user with require/include differences.
 if package.loaded["mod_xinerama"] then return end
 
-if not ioncore.load_module("mod_xinerama") then
+if not notioncore.load_module("mod_xinerama") then
     return
 end
 
@@ -306,55 +306,96 @@ end
 
 -- }}}
 
---- {{{ Setup ion's screens */
+--- {{{ Setup notion's screens */
 
---DOC
--- Move a WScreen off the visible virtual screen. 
-function mod_xinerama.move_offscreen(screen, max_right)
-    local dimensions = mod_xinerama.get_screen_dimensions(screen)
-    dimensions.x = max_right + 1
-    mod_xinerama.update_screen(screen, dimensions) 
+function mod_xinerama.close_invisible_screens(max_visible_screen_id)
+    local invisible_screen_id = max_visible_screen_id + 1
+    local invisible_screen = notioncore.find_screen_id(invisible_screen_id)
+    while invisible_screen do
+        -- note that this may not close the screen when it is still populated by
+        -- child windows that cannot be 'rescued'
+        invisible_screen:rqclose();
+
+        invisible_screen_id = invisible_screen_id + 1
+        invisible_screen = notioncore.find_screen_id(invisible_screen_id)
+    end
+
+end
+
+-- find any screens with 0 workspaces and populate them with an empty one
+function mod_xinerama.populate_empty_screens()
+   local screen_id = 0;
+   local screen = notioncore.find_screen_id(screen_id)
+   while (screen ~= nil) do
+       if screen:mx_count() == 0 then
+           notioncore.create_ws(screen)
+       end
+
+       screen_id = screen_id + 1
+       screen = notioncore.find_screen_id(screen_id)
+   end
+end
+
+-- This should be made 'smarter', but at least let's make sure workspaces don't
+-- end up on invisible screens
+function mod_xinerama.rearrange_workspaces(max_visible_screen_id)
+   function move_to_first_screen(workspace)
+       notioncore.find_screen_id(0):attach(workspace)
+   end
+
+   function rearrange_workspaces_s(screen)
+       if screen:id() > max_visible_screen_id then
+           for i = 0, screen:mx_count() do
+               move_to_first_screen(screen:mx_nth(i))
+           end
+       end
+   end
+
+   local screen_id = 0;
+   local screen = notioncore.find_screen_id(screen_id)
+   while (screen ~= nil) do
+       rearrange_workspaces_s(screen);      
+
+       screen_id = screen_id + 1
+       screen = notioncore.find_screen_id(screen_id)
+   end
+   mod_xinerama.populate_empty_screens()
+end
+
+function mod_xinerama.find_max_screen_id(screens)
+    local max_screen_id = 0
+
+    for screen_index, screen in ipairs(screens) do
+        local screen_id = screen_index - 1
+        max_screen_id = max(max_screen_id, screen_id)        
+    end
+
+    return max_screen_id;
 end
 
 --DOC
--- Perform the setup of ion screens.
+-- Perform the setup of notion screens.
 --
--- The first call sets up the screens of ion, subsequent calls update the
+-- The first call sets up the screens of notion, subsequent calls update the
 -- current screens
 --
 -- Returns true on success, false on failure
 --
 -- Example input: {{x=0,y=0,w=1024,h=768},{x=1024,y=0,w=1280,h=1024}}
 function mod_xinerama.setup_screens(screens)
-    local max_screen_id = 0
-    local max_right
-
+    -- Update screen dimensions or create new screens
     for screen_index, screen in ipairs(screens) do
         local screen_id = screen_index - 1
-        max_screen_id = max(max_screen_id, screen_id)        
-        max_right = max(max_right, screen.x + screen.w)
+        local existing_screen = notioncore.find_screen_id(screen_id)
 
-        local existing_screen = ioncore.find_screen_id(screen_id)
         if existing_screen ~= nil then
             mod_xinerama.update_screen(existing_screen, screen)
         else
             mod_xinerama.setup_new_screen(screen_id, screen)
+            if package.loaded["mod_sp"] then
+                mod_sp.create_scratchpad(notioncore.find_screen_id(screen_id))
+            end
         end
-    end
-
-    -- TODO what to do when the number of screens is lower than last time
-    -- this function was called? Remove the screen and store its contents
-    -- somewhere else?
-
-    -- for now move the screen to a location outside the virtual screen, so
-    -- it can't be accidentally focussed and obscure the proper screens
-    local invisible_screen_id = max_screen_id + 1
-    local invisible_screen = ioncore.find_screen_id(invisible_screen_id)
-    while invisible_screen do
-        mod_xinerama.move_offscreen(invisible_screen, max_right)
-
-        invisible_screen_id = invisible_screen_id + 1
-        invisible_screen = ioncore.find_screen_id(invisible_screen_id)
     end
 end
 
@@ -367,15 +408,20 @@ package.loaded["mod_xinerama"]=true
 dopath('cfg_xinerama', true)
 
 --DOC
--- Queries Xinerama for the screen dimensions and updates ion screens 
+-- Queries Xinerama for the screen dimensions and updates notion screens 
 -- accordingly
 function mod_xinerama.refresh()
     local screens = mod_xinerama.query_screens()
     if screens then
         local merged_screens = mod_xinerama.merge_overlapping_screens(screens)
         mod_xinerama.setup_screens(merged_screens)
+
+        -- when the number of screens is lower than last time this function was 
+        -- called, ask 'superfluous' to close
+        mod_xinerama.close_invisible_screens(mod_xinerama.find_max_screen_id(screens))
     end 
     notioncore.screens_updated(notioncore.rootwin());
 end
 
+-- At this point any workspaces from a saved session haven't been added yet
 mod_xinerama.refresh()

@@ -1,3 +1,7 @@
+-- Authors: Tibor Csögör <tibi@tiborius.net>
+-- License: Public domain
+-- Last Changed: 2006-11-14
+--
 -- $Id: statusd_df.lua 60 2006-11-14 11:19:29Z tibi $
 
 -- statusd_df.lua -- disk space monitor for Ion3's statusbar
@@ -78,7 +82,7 @@ local function get_df()
       i, j, fsname, fssize, fsused, fsavail, fsusedp, mpoint
 	 = string.find(s, "(/%S+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%%?%s(%S+)\n",
 		       i)
-      if (i == nil) then return nil end
+      if (i == nil) then break end
       df_table[mpoint] = { mpoint=mpoint,
 	                   fs=fsname,
 	                   size=guess_mem_unit(tonumber(fssize)),

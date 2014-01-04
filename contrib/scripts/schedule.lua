@@ -1,3 +1,7 @@
+-- Authors: Sadrul Habib Chowdhury <imadil@gmail.com>
+-- License: Public domain
+-- Last Changed: Unknown
+--
 -- schedule.lua: schedule notification script
 --
 -- You can schedule some messages to show up in the statusbar at

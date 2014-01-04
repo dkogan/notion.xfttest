@@ -21,7 +21,7 @@ Directory to search for configuration files and other scripts
 .TP
 .B \-oneroot
 On X servers with multiple (traditional non-Xinerama) screens, manage only
-default screen (root window), not all, as given by the -display option or
+default screen (root window), not all, as given by the \-display option or
 in the DISPLAY environment variable.
 .TP
 .B \-session session_name
@@ -156,7 +156,7 @@ Notion home page.
 .PP
 .I DOCDIR/
 .PP
-\fIX(7x)\fP, \fIpwm3(1)\fP, \fIjoe(1)\fP
+\fIX(7x)\fP, \fIjoe(1)\fP
 
 .SH AUTHOR
 Notion was written by the Notion team, based on Ion which was written by Tuomo Valkonen <tuomov at iki.fi>.

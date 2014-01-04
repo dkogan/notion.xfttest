@@ -1,3 +1,7 @@
+-- Authors: Matus Telgarsky <mtelgars@andrew.cmu.edu>
+-- License: Unknown
+-- Last Changed: Unknown
+--
 -- little ticker boondoggle
 --
 -- Selects amongst a set of specified commands and scrolls them not only line by line
@@ -115,7 +119,7 @@ if statusd ~= nil then
     statusd.inform("ticker_template", string.rep('x', settings.line_len))
 
     settings.update_fun = ticker_update
-    settings.commands.count = table.getn(settings.commands)
+    settings.commands.count = #(settings.commands)
     if settings.commands.count == 1 then
         settings.commands.get = ticker_single
     elseif settings.random then

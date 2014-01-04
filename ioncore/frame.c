@@ -82,15 +82,15 @@ static WFrameMode framemode_is_floating(WFrameMode mode)
 
 
 bool frame_init(WFrame *frame, WWindow *parent, const WFitParams *fp,
-                WFrameMode mode)
+                WFrameMode mode, char *name)
 {
     WRectangle mg;
 
     frame->flags=0;
-    frame->saved_w=0;
-    frame->saved_h=0;
-    frame->saved_x=0;
-    frame->saved_y=0;
+    frame->saved_geom.w=0;
+    frame->saved_geom.h=0;
+    frame->saved_geom.x=0;
+    frame->saved_geom.y=0;
     frame->tab_dragged_idx=-1;
     frame->titles=NULL;
     frame->titles_n=0;
@@ -104,7 +104,7 @@ bool frame_init(WFrame *frame, WWindow *parent, const WFitParams *fp,
     
     gr_stylespec_init(&frame->baseattr);
     
-    if(!mplex_init((WMPlex*)frame, parent, fp, "Notion WFrame"))
+    if(!mplex_init((WMPlex*)frame, parent, fp, name))
         return FALSE;
     
     frame_initialise_gr(frame);
@@ -126,9 +126,9 @@ bool frame_init(WFrame *frame, WWindow *parent, const WFitParams *fp,
 }
 
 
-WFrame *create_frame(WWindow *parent, const WFitParams *fp, WFrameMode mode)
+WFrame *create_frame(WWindow *parent, const WFitParams *fp, WFrameMode mode, char *name)
 {
-    CREATEOBJ_IMPL(WFrame, frame, (p, parent, fp, mode));
+    CREATEOBJ_IMPL(WFrame, frame, (p, parent, fp, mode, name));
 }
 
 
@@ -403,26 +403,28 @@ bool frame_fitrep(WFrame *frame, WWindow *par, const WFitParams *fp)
 
     mplex_managed_geom((WMPlex*)frame, &mg);
     
-    if(hchg){
-        if(mg.h<=1){
-            frame->flags|=(FRAME_SHADED|FRAME_SAVED_VERT);
-            frame->saved_y=old_geom.y;
-            frame->saved_h=old_geom.h;
-        }else{
-            frame->flags&=~FRAME_SHADED;
+    if(!(frame->flags&FRAME_KEEP_FLAGS)){
+        if(hchg){
+            if(mg.h<=1){
+                frame->flags|=(FRAME_SHADED|FRAME_SAVED_VERT);
+                frame->saved_geom.y=old_geom.y;
+                frame->saved_geom.h=old_geom.h;
+            }else{
+                frame->flags&=~FRAME_SHADED;
+            }
+            frame->flags&=~FRAME_MAXED_VERT;
         }
-        frame->flags&=~FRAME_MAXED_VERT;
-    }
-    
-    if(wchg){
-        if(mg.w<=1){
-            frame->flags|=(FRAME_MIN_HORIZ|FRAME_SAVED_HORIZ);
-            frame->saved_x=old_geom.x;
-            frame->saved_w=old_geom.w;
-        }else{
-            frame->flags&=~FRAME_MIN_HORIZ;
+
+        if(wchg){
+            if(mg.w<=1){
+                frame->flags|=(FRAME_MIN_HORIZ|FRAME_SAVED_HORIZ);
+                frame->saved_geom.x=old_geom.x;
+                frame->saved_geom.w=old_geom.w;
+            }else{
+                frame->flags&=~FRAME_MIN_HORIZ;
+            }
+            frame->flags&=~FRAME_MAXED_HORIZ;
         }
-        frame->flags&=~FRAME_MAXED_HORIZ;
     }
 
     if(wchg || hchg){
@@ -478,8 +480,10 @@ void frame_size_hints(WFrame *frame, WSizeHints *hints_ret)
     
     hints_ret->base_width+=woff;
     hints_ret->base_height+=hoff;
-    hints_ret->max_width+=woff;
-    hints_ret->max_height+=hoff;
+    if(hints_ret->max_width!=INT_MAX)
+        hints_ret->max_width+=woff;
+    if(hints_ret->max_height!=INT_MAX)
+        hints_ret->max_height+=hoff;
     hints_ret->min_width+=woff;
     hints_ret->min_height+=hoff;
     
@@ -667,7 +671,7 @@ bool frame_set_shaded(WFrame *frame, int sp)
     if(!nset){
         if(!(frame->flags&FRAME_SAVED_VERT))
             return FALSE;
-        rq.geom.h=frame->saved_h;
+        rq.geom.h=frame->saved_geom.h;
     }else{
         if(frame->barmode==FRAME_BAR_NONE)
             return FALSE;
@@ -874,13 +878,13 @@ ExtlTab frame_get_configuration(WFrame *frame)
     extl_table_sets_i(tab, "mode", frame->mode);
 
     if(frame->flags&FRAME_SAVED_VERT){
-        extl_table_sets_i(tab, "saved_y", frame->saved_y);
-        extl_table_sets_i(tab, "saved_h", frame->saved_h);
+        extl_table_sets_i(tab, "saved_y", frame->saved_geom.y);
+        extl_table_sets_i(tab, "saved_h", frame->saved_geom.h);
     }
 
     if(frame->flags&FRAME_SAVED_HORIZ){
-        extl_table_sets_i(tab, "saved_x", frame->saved_x);
-        extl_table_sets_i(tab, "saved_w", frame->saved_w);
+        extl_table_sets_i(tab, "saved_x", frame->saved_geom.x);
+        extl_table_sets_i(tab, "saved_w", frame->saved_geom.w);
     }
     
     return tab;
@@ -895,15 +899,15 @@ void frame_do_load(WFrame *frame, ExtlTab tab)
     
     if(extl_table_gets_i(tab, "saved_x", &p) &&
        extl_table_gets_i(tab, "saved_w", &s)){
-        frame->saved_x=p;
-        frame->saved_w=s;
+        frame->saved_geom.x=p;
+        frame->saved_geom.w=s;
         frame->flags|=FRAME_SAVED_HORIZ;
     }
 
     if(extl_table_gets_i(tab, "saved_y", &p) &&
        extl_table_gets_i(tab, "saved_h", &s)){
-        frame->saved_y=p;
-        frame->saved_h=s;
+        frame->saved_geom.y=p;
+        frame->saved_geom.h=s;
         frame->flags|=FRAME_SAVED_VERT;
     }
     
@@ -924,7 +928,7 @@ WRegion *frame_load(WWindow *par, const WFitParams *fp, ExtlTab tab)
         }
     }
     
-    frame=create_frame(par, fp, mode);
+    frame=create_frame(par, fp, mode, "WFrame");
     
     if(frame!=NULL)
         frame_do_load(frame, tab);

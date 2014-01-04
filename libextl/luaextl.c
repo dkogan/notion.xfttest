@@ -40,6 +40,7 @@
 #define MAX_PARAMS 16
 
 static lua_State *l_st=NULL;
+ExtlHook current_hook=NULL;
 
 static bool extl_stack_get(lua_State *st, int pos, char type, 
                            bool copystring, bool *wasdeadobject,
@@ -53,16 +54,19 @@ static void flushtrace();
 #define flushtrace()
 #endif
 
-
 /*{{{ Safer rawget/set/getn */
 
 
 #define CHECK_TABLE(ST, INDEX) luaL_checktype(ST, INDEX, LUA_TTABLE)
 
-static int luaL_getn_check(lua_State *st, int index)
+static int lua_objlen_check(lua_State *st, int index)
 {
     CHECK_TABLE(st, index);
-    return luaL_getn(st, index);
+#if LUA_VERSION_NUM>=502
+    return lua_rawlen(st, index);
+#else
+    return lua_objlen(st, index);
+#endif
 }
 
 
@@ -136,7 +140,15 @@ static bool extl_cpcall(lua_State *st, ExtlCPCallFn *fn, void *ptr)
     param.retval=FALSE;
     
     
+#if LUA_VERSION_NUM>=502
+    /* TODO: Call appropriate lua_checkstack!?
+    lua_checkstack(st, 2); */
+    lua_pushcfunction(st, extl_docpcall);
+    lua_pushlightuserdata(st, &param);
+    err=lua_pcall(st, 1, 0, 0);
+#else
     err=lua_cpcall(st, extl_docpcall, &param);
+#endif
     if(err==LUA_ERRRUN){
         extl_warn("%s", lua_tostring(st, -1));
     }else if(err==LUA_ERRMEM){
@@ -460,7 +472,7 @@ static bool extl_init_obj_info(lua_State *st)
     lua_pushstring(st, "v");
     lua_rawset_check(st, -3);
     lua_setmetatable(st, -2);
-    owned_cache_ref=lua_ref(st, -1);
+    owned_cache_ref=luaL_ref(st, LUA_REGISTRYINDEX);
 
     lua_pushcfunction(st, extl_obj_typename);
     lua_setglobal(st, "obj_typename");
@@ -588,32 +600,7 @@ bool extl_init()
         return FALSE;
     }
 
-    /* This is equivalent to calling all the ones below but it also includes
-     * the debug library, so I went with those in case there was a reason not
-     * to include the debug library.
     luaL_openlibs(l_st);
-    */
-
-    lua_pushcfunction(l_st, luaopen_base);
-    lua_call(l_st, 0, 0);
-
-    lua_pushcfunction(l_st, luaopen_table);
-    lua_call(l_st, 0, 0);
-
-    lua_pushcfunction(l_st, luaopen_io);
-    lua_call(l_st, 0, 0);
-
-    lua_pushcfunction(l_st, luaopen_os);
-    lua_call(l_st, 0, 0);
-
-    lua_pushcfunction(l_st, luaopen_string);
-    lua_call(l_st, 0, 0);
-
-    lua_pushcfunction(l_st, luaopen_math);
-    lua_call(l_st, 0, 0);
-
-    lua_pushcfunction(l_st, luaopen_package);
-    lua_call(l_st, 0, 0);
 
     if(!extl_init_obj_info(l_st)){
         lua_close(l_st);
@@ -726,9 +713,9 @@ static bool extl_stack_get(lua_State *st, int pos, char type,
             lua_pushvalue(st, pos);
             if(type=='a'){
                 ((ExtlAny*)valret)->type='f';
-                ((ExtlAny*)valret)->value.f=lua_ref(st, 1);
+                ((ExtlAny*)valret)->value.f=luaL_ref(st, LUA_REGISTRYINDEX);
             }else{
-                *((int*)valret)=lua_ref(st, 1);
+                *((int*)valret)=luaL_ref(st, LUA_REGISTRYINDEX);
             }
         }
         return TRUE;
@@ -740,9 +727,9 @@ static bool extl_stack_get(lua_State *st, int pos, char type,
             lua_pushvalue(st, pos);
             if(type=='a'){
                 ((ExtlAny*)valret)->type='t';
-                ((ExtlAny*)valret)->value.f=lua_ref(st, 1);
+                ((ExtlAny*)valret)->value.f=luaL_ref(st, LUA_REGISTRYINDEX);
             }else{
-                *((int*)valret)=lua_ref(st, 1);
+                *((int*)valret)=luaL_ref(st, LUA_REGISTRYINDEX);
             }
         }
         return TRUE;
@@ -901,7 +888,7 @@ static bool extl_getref(lua_State *st, int ref)
 
 static bool extl_do_unref(lua_State *st, int *refp)
 {
-    lua_unref(st, *refp);
+    luaL_unref(st, LUA_REGISTRYINDEX, *refp);
     return TRUE;
 }
 
@@ -940,7 +927,7 @@ static bool extl_do_ref(lua_State *st, int *refp)
 {
     if(!extl_getref(st, *refp))
         return FALSE;
-    *refp=lua_ref(st, 1);
+    *refp=luaL_ref(st, LUA_REGISTRYINDEX);
     return TRUE;
 }
 
@@ -966,7 +953,7 @@ ExtlFn extl_ref_fn(ExtlFn ref)
 static bool extl_do_create_table(lua_State *st, int *refp)
 {
     lua_newtable(st);
-    *refp=lua_ref(st, 1);
+    *refp=luaL_ref(st, LUA_REGISTRYINDEX);
     return TRUE;
 }
 
@@ -994,7 +981,11 @@ static bool extl_do_eq(lua_State *st, EqParams *ep)
         return FALSE;
     if(!extl_getref(st, ep->o2))
         return FALSE;
+#if LUA_VERSION_NUM>=502
+    ep->ret=lua_compare(st, -1, -2,LUA_OPEQ);
+#else
     ep->ret=lua_equal(st, -1, -2);
+#endif
     return TRUE;
 }
 
@@ -1179,7 +1170,7 @@ typedef struct{
 static bool extl_table_do_get_n(lua_State *st, GetNParams *params)
 {
     lua_rawgeti(st, LUA_REGISTRYINDEX, params->ref);
-    params->n=luaL_getn_check(st, -1);
+    params->n=lua_objlen_check(st, -1);
     return TRUE;
 }
 
@@ -1625,31 +1616,25 @@ bool extl_call(ExtlFn fnref, const char *spec, const char *rspec, ...)
 /*{{{ extl_loadfile/string */
 
 
+/**
+ * Expects 
+ * - a stack with only the parameters to be passed to the function 
+ * - the function to call as an upvalue
+ * Performs
+ * - execute the function
+ * Returns
+ * - the number of return values
+ */
 static int call_loaded(lua_State *st)
 {
-    int i, nargs=lua_gettop(st);
+    int nargs=lua_gettop(st);
 
     /* Get the loaded file/string as function */
     lua_pushvalue(st, lua_upvalueindex(1));
-    
-    /* Fill 'arg' */
-    lua_getfenv(st, -1);
-    lua_pushstring(st, "arg");
-    
-    if(nargs>0){
-        lua_newtable(st);
-        for(i=1; i<=nargs; i++){
-            lua_pushvalue(st, i);
-            lua_rawseti_check(st, -2, i);
-        }
-    }else{
-        lua_pushnil(st);
-    }
-    
-    lua_rawset_check(st, -3);
-    lua_pop(st, 1);
-    lua_call(st, 0, LUA_MULTRET);
-    return (lua_gettop(st)-nargs);
+    lua_insert(st, 1);
+
+    lua_call(st, nargs, LUA_MULTRET);
+    return lua_gettop(st);
 }
 
 
@@ -1660,6 +1645,10 @@ typedef struct{
 } ExtlLoadParam;
 
 
+/**
+ * Stores a c closure in param->resptr containing a call to call_loaded with 
+ * as (fixed) parameter the function loaded from the file/buffer in param->src
+ */
 static bool extl_do_load(lua_State *st, ExtlLoadParam *param)
 {
     int res=0;
@@ -1675,25 +1664,8 @@ static bool extl_do_load(lua_State *st, ExtlLoadParam *param)
         return FALSE;
     }
     
-    lua_newtable(st); /* Create new environment */
-    /* Now there's fn, newenv in stack */
-    lua_newtable(st); /* Create metatable */
-    lua_pushstring(st, "__index");
-    lua_getfenv(st, -4); /* Get old environment */
-    lua_rawset_check(st, -3); /* Set metatable.__index */
-    lua_pushstring(st, "__newindex");
-    lua_getfenv(st, -4); /* Get old environment */
-    lua_rawset_check(st, -3); /* Set metatable.__newindex */
-    /* Now there's fn, newenv, meta in stack */
-    lua_setmetatable(st, -2); /* Set metatable for new environment */
-    lua_setfenv(st, -2);
-    /* Now there should be just fn in stack */
-
-    /* Callloaded will put any parameters it gets in the table 'arg' in
-     * the newly created environment.
-     */
     lua_pushcclosure(st, call_loaded, 1);
-    *(param->resptr)=lua_ref(st, -1);
+    *(param->resptr)=luaL_ref(st, LUA_REGISTRYINDEX);
     
     return TRUE;
 }
@@ -2084,7 +2056,11 @@ typedef struct{
 static bool extl_do_register_function(lua_State *st, RegData *data)
 {
     ExtlExportedFnSpec *spec=data->spec, *spec2;
+#if LUA_VERSION_NUM>=502
+    int ind;
+#else
     int ind=LUA_GLOBALSINDEX;
+#endif
     
     if((spec->ispec!=NULL && strlen(spec->ispec)>MAX_PARAMS) ||
        (spec->ospec!=NULL && strlen(spec->ospec)>MAX_PARAMS)){
@@ -2097,6 +2073,12 @@ static bool extl_do_register_function(lua_State *st, RegData *data)
         lua_rawgeti(st, LUA_REGISTRYINDEX, data->table);
         ind=-3;
     }
+#if LUA_VERSION_NUM>=502
+    else{
+        lua_pushglobaltable(st);
+        ind=-3;
+    }
+#endif
     
     lua_pushstring(st, spec->name);
 
@@ -2147,12 +2129,22 @@ bool extl_register_functions(ExtlExportedFnSpec *spec)
 static bool extl_do_unregister_function(lua_State *st, RegData *data)
 {
     ExtlExportedFnSpec *spec=data->spec;
+#if LUA_VERSION_NUM>=502
+    int ind;
+#else
     int ind=LUA_GLOBALSINDEX;
+#endif
     
     if(data->table!=LUA_NOREF){
         lua_rawgeti(st, LUA_REGISTRYINDEX, data->table);
         ind=-3;
     }
+#if LUA_VERSION_NUM>=502
+    else{
+        lua_pushglobaltable(st);
+        ind=-3;
+    }
+#endif
     
     /* Clear table.fn */
     lua_pushstring(st, spec->name);
@@ -2256,11 +2248,19 @@ static bool extl_do_register_class(lua_State *st, ClassData *data)
     
     /* Set the global WFoobar */
     lua_pushvalue(st, -1);
-    data->refret=lua_ref(st, 1); /* TODO: free on failure */
+    data->refret=luaL_ref(st, LUA_REGISTRYINDEX); /* TODO: free on failure */
     if(!data->hide){
+#if LUA_VERSION_NUM>=502
+        lua_pushglobaltable(st);
+        lua_pushstring(st, data->cls);
+        lua_pushvalue(st, -3);
+        lua_rawset(st, -3);
+        lua_remove(st, -1);
+#else
         lua_pushstring(st, data->cls);
         lua_pushvalue(st, -2);
         lua_rawset(st, LUA_GLOBALSINDEX);
+#endif
     }
 
     /* New we create a metatable for the actual objects with __gc metamethod
@@ -2318,16 +2318,24 @@ static void extl_do_unregister_class(lua_State *st, ClassData *data)
     /* Get __index and return it for resetting the functions. */
     lua_pushstring(st, "__index");
     lua_gettable(st, -2);
-    data->refret=lua_ref(st, -1);
+    data->refret=luaL_ref(st, LUA_REGISTRYINDEX);
     lua_pop(st, 1);
     /* Set the entry from registry to nil. */
     lua_pushnil(st);
     lua_rawset(st, LUA_REGISTRYINDEX);
     
     /* Reset the global reference to the class to nil. */
+#if LUA_VERSION_NUM>=502
+    lua_pushglobaltable(st);
+    lua_pushstring(st, data->cls);
+    lua_pushnil(st);
+    lua_rawset(st, -3);
+    lua_remove(st, -1);
+#else
     lua_pushstring(st, data->cls);
     lua_pushnil(st);
     lua_rawset(st, LUA_GLOBALSINDEX);
+#endif
 }
 
 
@@ -2368,7 +2376,7 @@ static bool extl_do_register_module(lua_State *st, ClassData *clsdata)
     lua_pushvalue(st, -2);
     lua_rawset(st, LUA_REGISTRYINDEX);
     
-    clsdata->refret=lua_ref(st, -1);
+    clsdata->refret=luaL_ref(st, LUA_REGISTRYINDEX);
     
     return TRUE;
 }
@@ -2399,7 +2407,7 @@ static bool extl_do_unregister_module(lua_State *st, ClassData *clsdata)
     lua_pushvalue(st, -1);
     lua_pushnil(st);
     lua_rawset(st, LUA_REGISTRYINDEX);
-    clsdata->refret=lua_ref(st, -1);
+    clsdata->refret=luaL_ref(st, LUA_REGISTRYINDEX);
     
     return TRUE;
 }
@@ -2543,6 +2551,33 @@ extern bool extl_serialise(const char *file, ExtlTab tab)
     return ret;
 }
 
+void extl_dohook(lua_State *L, lua_Debug *ar)
+{
+    enum ExtlHookEvent event;
+    const char *source;
+
+    lua_getinfo(L, "Sn", ar);
+    if (ar->event == LUA_HOOKCALL)
+        event = EXTL_HOOK_ENTER;
+    else if (ar->event == LUA_HOOKRET)
+        event = EXTL_HOOK_EXIT;
+    else
+        event = EXTL_HOOK_UNKNOWN;
+
+    if (ar->source[0] == '@' && strcmp(ar->what, "Lua") == 0)
+        (*current_hook) (event, ar->name, ar->source + 1, ar->linedefined);
+}
+
+int extl_sethook(ExtlHook hook)
+{
+    current_hook = hook;
+    return lua_sethook(l_st, extl_dohook, LUA_MASKCALL | LUA_MASKRET, -1);
+}
+
+int extl_resethook()
+{
+    return lua_sethook(l_st, NULL, 0, -1);
+}
 
 /*}}}*/
 

@@ -16,6 +16,15 @@ defwinprop{
     ignore_cfgrq = true,
 }
 
+-- Better would be to apply these settings automatically whenever a window
+-- has type _NET_WM_WINDOW_TYPE_NOTIFICATION
+defwinprop{
+        class = "Xfce4-notifyd",
+
+        float = true,
+        userpos = true,
+        switchto = false,
+}
 
 -- Put all dockapps in the statusbar's systray, also adding the missing
 -- size hints necessary for this to work.
@@ -26,6 +35,18 @@ defwinprop{
     min_size = { w = 64, h = 64},
 }
 
+-- Make an exception for Docker, which sets correct size hints.
+defwinprop{
+    is_dockapp = true,
+    class = "Docker",
+    statusbar = "systray",
+}
+
+-- https://sourceforge.net/tracker/?func=detail&aid=3471910&group_id=314802&atid=1324528
+defwinprop{ 
+    class = "Gimp", 
+    acrobatic = true,
+}
 
 -- You might want to enable these if you really must use XMMS. 
 --[[

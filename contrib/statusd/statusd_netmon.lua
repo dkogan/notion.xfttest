@@ -1,3 +1,7 @@
+-- Authors: Sadrul Habib Chowdhury <imadil@gmail.com>
+-- License: Public domain
+-- Last Changed: Unknown
+--
 -- statusd_netmon.lua: monitor the speed of a network interface
 --
 -- Thanx to Tuomo for pointing out a problem in the previous script.
@@ -228,7 +232,7 @@ local function sanity_check()
                                 -- us the positions of the info we seek
 
     local t = tokenize(s)
-    local n = table.getn(t)
+    local n = #(t)
     local i = 0
 
     for i = 0,n do
