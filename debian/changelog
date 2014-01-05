@@ -1,4 +1,4 @@
-notion (3+2014010402-1) unstable; urgency=medium
+notion (3+2014010505-1) unstable; urgency=medium
 
   * New upstream version (closes: #725388)
     - many improvements to multihead support
