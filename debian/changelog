@@ -1,3 +1,12 @@
+notion (3+2014010901-1) unstable; urgency=medium
+
+  * New upstream version
+    - font fallback
+    - new FSF address
+    - manpage fix
+
+ -- Arnout Engelen <arnouten@bzzt.net>  Thu, 09 Jan 2014 21:09:52 +0100
+
 notion (3+2014010505-1) unstable; urgency=medium
 
   * New upstream version (closes: #725388)
