@@ -1,0 +1,21 @@
+Use dpkg-buildflags, which introduces hardening/fortify flags.
+
+Note that lintian still complains some .so's are not fortified, but it looks 
+like this is a false positive.
+
+This should eventually make its way in the default build procedure.
+--- a/system-autodetect.mk
++++ b/system-autodetect.mk
+@@ -154,9 +154,10 @@
+ 	-Wparentheses -pedantic -Wuninitialized
+ 
+ CFLAGS += -Os $(WARN) $(DEFINES) $(INCLUDES) $(EXTRA_INCLUDES) \
+-          -DHAS_SYSTEM_ASPRINTF=$(HAS_SYSTEM_ASPRINTF)
++          -DHAS_SYSTEM_ASPRINTF=$(HAS_SYSTEM_ASPRINTF) \
++          $(shell dpkg-buildflags --get CFLAGS) $(shell dpkg-buildflags --get CPPFLAGS)
+ 
+-LDFLAGS += -Wl,--as-needed $(LIBS) $(EXTRA_LIBS)
++LDFLAGS += -Wl,--as-needed $(LIBS) $(EXTRA_LIBS) $(shell dpkg-buildflags --get LDFLAGS)
+ EXPORT_DYNAMIC=-Xlinker --export-dynamic
+ 
+ # The following options are mainly for development use and can be used

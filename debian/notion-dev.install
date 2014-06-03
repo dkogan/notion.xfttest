@@ -1,0 +1,4 @@
+build/system-inc.mk build/rules.mk usr/share/notion/build
+install-sh config.h system-autodetect.mk usr/lib/notion
+build/libs.mk usr/lib/notion/build
+libextl/libextl-mkexports usr/lib/notion/libextl

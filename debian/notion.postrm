@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+# i18n menu method
+inst=/etc/menu-methods/notion-i18n
+if [ "$1" = "remove" ] && [ -f "$inst" ]; then chmod a-x $inst ; fi
+
+# i18n menu method
+inst=/etc/X11/notion/cfg_debian_ext.lua
+if [ "$1" = "purge" ] && [ -f "$inst" ]; then rm $inst ; fi
+
+#DEBHELPER#

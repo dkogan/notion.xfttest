@@ -1,0 +1,27 @@
+Add a 'Debian' menu populated by the Debian menu system
+--- a/etc/cfg_notioncore.lua
++++ b/etc/cfg_notioncore.lua
+@@ -347,6 +347,7 @@
+     menuentry("Help",           "mod_query.query_man(_)"),
+     menuentry("About Notion",      "mod_query.show_about_ion(_)"),
+     submenu("Styles",           "stylemenu"),
++    submenu("Debian",           "Debian"),
+     submenu("Session",          "sessionmenu"),
+ })
+ 
+@@ -392,3 +393,15 @@
+ defctxmenu("WClientWin", "Client window", {
+     menuentry("Kill",           "WClientWin.kill(_)"),
+ })
++
++-- Auto-generated Debian menu definitions
++if os then
++   havemenus = os.execute("test -x /usr/bin/update-menus")
++   if havemenus == 0 or havemenus == true then
++      if ioncore.is_i18n() then
++         dopath("debian-menu-i18n")
++      else
++         dopath("debian-menu")
++      end
++   end
++end

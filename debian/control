@@ -1,0 +1,40 @@
+Source: notion
+Section: non-free/x11
+Priority: extra
+Maintainer: Arnout Engelen <arnouten@bzzt.net>
+Uploaders: Dima Kogan <dima@secretsauce.net>
+Standards-Version: 3.9.5
+Build-Depends: debhelper (>= 7), pkg-config, lua5.2, liblua5.2-dev, libx11-dev, libxext-dev, libsm-dev, libxinerama-dev, libxrandr-dev
+XS-Autobuild: yes
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/notion.git
+Vcs-Git: git://anonscm.debian.org/collab-maint/notion.git
+Homepage: http://notion.sourceforge.net/
+
+Package: notion
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, xterm | x-terminal-emulator, x11-utils
+Recommends: xfonts-75dpi | xfonts-75dpi-transcoded | xfonts-100dpi | xfonts-100dpi-transcoded, libxrandr2, libxinerama1
+Suggests: menu (>= 2.1.9), docker, notion-doc, notion-scripts
+Provides: x-window-manager, notion-api-${Notion:ApiVersion}
+Replaces: particleman
+Description: tiling tabbed window manager designed for keyboard users
+ Notion divides the screen into tiles and places windows in these tiles
+ by default.  Each tile has a set of tabs for the windows within it.
+ It also allows windows to be made 'floating' and placed freely.  Notion
+ can be controlled through the keyboard alone or together with a mouse.
+ .
+ Notion can be configured and extended using the Lua language.  It also
+ supports extension modules written in C.
+
+Package: notion-dev
+Section: non-free/devel
+Architecture: all
+Depends: ${misc:Depends}, libx11-dev, libsm-dev, lua5.2, gcc (>> 3)
+Description: Notion development files
+ Notion divides the screen into tiles and places windows in these tiles
+ by default.  Each tile has a set of tabs for the windows within it.
+ It also allows windows to be made 'floating' and placed freely.  Notion
+ can be controlled through the keyboard alone or together with a mouse.
+ .
+ This package contains the files necessary for building extension
+ modules to the Notion window manager

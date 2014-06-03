@@ -1,0 +1,35 @@
+Build options suitable for installation from the official package on Debian
+--- a/system-autodetect.mk
++++ b/system-autodetect.mk
+@@ -9,7 +9,7 @@
+ # Installation path prefix. Unless you know what you're doing, the default
+ # of /usr/local is likely the correct choice.
+ #DIST: PREFIX=/usr/local
+-PREFIX ?= /usr/local
++PREFIX ?= /usr
+ 
+ # Unless you are creating a package conforming to some OS's standards, you
+ # probably do not want to modify the following directories:
+@@ -25,11 +25,11 @@
+ # Nothing at the moment
+ LIBDIR=$(PREFIX)/lib
+ # Modules
+-MODULEDIR=$(LIBDIR)/notion/mod
++MODULEDIR=$(LIBDIR)/notion
+ # Compiled Lua source code
+ LCDIR=$(LIBDIR)/notion/lc
+ # ion-completefile (does not belong in SHAREDIR being a binary file)
+-EXTRABINDIR=$(LIBDIR)/notion/bin
++EXTRABINDIR=$(LIBDIR)/notion
+ # For notion-completeman system-wide cache
+ VARDIR=/var/cache/notion
+ # Message catalogs
+@@ -37,7 +37,7 @@
+ 
+ # Configuration .lua files. Overrideable, as config files are usually
+ # not placed under $(PREFIX).
+-ETCDIR ?= $(PREFIX)/etc/notion
++ETCDIR ?= /etc/X11/notion
+ 
+ # Force all include files to be installed to /usr even if the
+ # PREFIX is unset. No header files are installed at the moment

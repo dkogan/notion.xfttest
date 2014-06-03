@@ -1,0 +1,2 @@
+?package(notion):needs="wm" section="Window Managers" \
+  title="Notion" command="/usr/bin/notion"

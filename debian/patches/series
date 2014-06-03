@@ -1,0 +1,8 @@
+201_build-config.diff
+206_use-x-terminal-emulator.diff
+209_use-etc-default.diff
+210_use-cfg_debian_ext.diff
+211_add-debian-menu.diff
+212_suggest-notion-doc.diff
+216_hardening-flags.diff
+218_drop_changelog.diff

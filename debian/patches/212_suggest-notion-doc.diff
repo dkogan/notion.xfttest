@@ -1,0 +1,32 @@
+Refer users to a notion-doc package rather than the home page
+--- a/man/notion.in
++++ b/man/notion.in
+@@ -151,8 +151,8 @@
+ .SH SEE ALSO
+ The Notion home page, \fIhttp://notion.sf.net/\fP
+ .PP
+-The document "Configuring and extending Notion with Lua" found on the
+-Notion home page.
++The document "Configuring and extending Notion with Lua" found in the
++notion-doc package.
+ .PP
+ .I DOCDIR/
+ .PP
+--- a/man/welcome.head
++++ b/man/welcome.head
+@@ -14,11 +14,10 @@
+ accessed with <F12>.
+ 
+ When you feel ready to write customized configuration files (you're going
+-to do that in any case), please see the configuration manual available from
+-the Notion webpage listed at the end of the user manual below. It may, however,
+-be beneficial to become well acquainted with Notion before delving into this 
+-so that you have grasped the basic concepts necessary to understand the
+-binding configuration files.
++to do that in any case), please see the configuration manual available in
++the notion-doc package. It may, however, be beneficial to become well
++acquainted with Notion before delving into this so that you have grasped the
++basic concepts necessary to understand the binding configuration files.
+ 
+ 
+ ---- Manual page follows ----

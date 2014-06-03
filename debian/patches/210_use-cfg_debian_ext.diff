@@ -1,0 +1,10 @@
+Allow for extra configuration files
+--- a/etc/cfg_defaults.lua
++++ b/etc/cfg_defaults.lua
+@@ -13,3 +13,6 @@
+ dopath("mod_sp")
+ dopath("mod_notionflux")
+ dopath("mod_xrandr")
++
++-- Debian extra configuration files
++dopath("cfg_debian_ext")

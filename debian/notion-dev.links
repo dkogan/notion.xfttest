@@ -1,0 +1,6 @@
+usr/share/notion/build/system-inc.mk usr/include/notion/build/system-inc.mk
+usr/share/notion/build/rules.mk usr/include/notion/build/rules.mk
+usr/lib/notion/config.h usr/include/notion/config.h
+usr/lib/notion/system-autodetect.mk usr/include/notion/system-autodetect.mk
+usr/lib/notion/build/libs.mk usr/include/notion/build/libs.mk
+usr/lib/notion/libextl/libextl-mkexports usr/include/notion/libextl/libextl-mkexports

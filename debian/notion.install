@@ -1,0 +1,3 @@
+debian/notion.desktop usr/share/xsessions
+debian/default etc
+debian/install-notion-cfg usr/sbin
