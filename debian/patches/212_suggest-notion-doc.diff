@@ -1,7 +1,9 @@
 Refer users to a notion-doc package rather than the home page
---- a/man/notion.in
-+++ b/man/notion.in
-@@ -151,8 +151,8 @@
+Index: notion/man/notion.in
+===================================================================
+--- notion.orig/man/notion.in
++++ notion/man/notion.in
+@@ -153,8 +153,8 @@ User default main configuration file (ov
  .SH SEE ALSO
  The Notion home page, \fIhttp://notion.sf.net/\fP
  .PP
@@ -12,9 +14,11 @@ Refer users to a notion-doc package rather than the home page
  .PP
  .I DOCDIR/
  .PP
---- a/man/welcome.head
-+++ b/man/welcome.head
-@@ -14,11 +14,10 @@
+Index: notion/man/welcome.head
+===================================================================
+--- notion.orig/man/welcome.head
++++ notion/man/welcome.head
+@@ -14,11 +14,10 @@ should start a terminal emulator (xterm)
  accessed with <F12>.
  
  When you feel ready to write customized configuration files (you're going
