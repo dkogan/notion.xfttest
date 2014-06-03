@@ -14,11 +14,11 @@ function move_current.move(ws, dir)
     if frame2 then
         frame2:attach(cwin, { switchto=true })
     end
-    cwin:goto()
+    cwin:goto_focus()
 end
 
 defbindings("WTiling", {
-    submap("Mod1+K", {
+    submap("META+K", {
         kpress("Up", function(ws) move_current.move(ws, "up") end),
         kpress("Down", function(ws) move_current.move(ws, "down") end),
         kpress("Left", function(ws) move_current.move(ws, "left") end),

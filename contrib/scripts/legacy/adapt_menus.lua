@@ -37,7 +37,7 @@
 -- Sep 2005, initial version, David Tweed
 
 function mkentryJump(frame,tgt,name)
-    return ioncore.menuentry(name, function() tgt:goto() end)
+    return ioncore.menuentry(name, function() tgt:goto_focus() end)
 end
 
 function mkentryClose(frame,tgt,name)
@@ -50,7 +50,7 @@ end
 
 function attachHere(frame,tgt)
     if tgt:manager()==frame then
-        tgt:goto()
+        tgt:goto_focus()
     else
         frame:attach(tgt,{switchto=true})
     end
@@ -175,11 +175,11 @@ end
 --[[
 -- some examples of usage
 defbindings("WFrame", {
-    kpress(MOD1.."F8", "mod_menu.menu(_,_sub,makelistEngine(_,'jump',mkentryJump,extend(ioncore.clientwin_list(),ioncore.region_list('WGenWS')),1))"),
+    kpress(META.."F8", "mod_menu.menu(_,_sub,makelistEngine(_,'jump',mkentryJump,extend(ioncore.clientwin_list(),ioncore.region_list('WGenWS')),1))"),
     kpress(MOD2.."F8", "mod_menu.menu(_,_sub,makelistEngine(_,'jumpWS',mkentryJump,ioncore.region_list('WGenWS'),4))"),
-    kpress(MOD1.."F7", "mod_menu.menu(_, _sub,makelistEngine(_,'attach',mkentryAttach,ioncore.clientwin_list(),1))"),
+    kpress(META.."F7", "mod_menu.menu(_, _sub,makelistEngine(_,'attach',mkentryAttach,ioncore.clientwin_list(),1))"),
     kpress(MOD2.."F7", "mod_menu.menu(_, _sub,makelistEngine(_,'close',mkentryClose,ioncore.clientwin_list(),1))"),
-    kpress(MOD1.."F6", "mod_menu.menu(_, _sub,makelistEngine(_,'raise',mkentryJump,extend(_:llist(1),ioncore.region_list('WGenWS')),4))"),
+    kpress(META.."F6", "mod_menu.menu(_, _sub,makelistEngine(_,'raise',mkentryJump,extend(_:llist(1),ioncore.region_list('WGenWS')),4))"),
     kpress(MOD2.."F6", "mod_menu.menu(_, _sub,makelistEngine(_,'close',mkentryClose,_:llist(1),4))"),
 })
 --]]

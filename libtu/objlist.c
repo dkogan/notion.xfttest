@@ -27,24 +27,6 @@ static ObjList *reuse_first(ObjList **objlist)
 }
 
 
-static ObjList *reuse_last(ObjList **objlist)
-{
-    ObjList *node=*objlist;
-    
-    if(node==NULL)
-        return NULL;
-    
-    node=node->prev;
-    
-    if(node!=NULL && node->watch.obj==NULL){
-        UNLINK_ITEM(*objlist, node, next, prev);
-        return node;
-    }
-
-    return NULL;
-}
-
-
 static ObjList *reuse(ObjList **objlist)
 {
     ObjList *first=reuse_first(objlist);
@@ -72,7 +54,7 @@ static void optimise(ObjList **objlist)
 }
 
 
-void watch_handler(Watch *watch, Obj *obj)
+void watch_handler(Watch *watch, Obj *UNUSED(obj))
 {
     ObjList *node=(ObjList*)watch;
     

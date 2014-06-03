@@ -6,7 +6,7 @@
 --
 -- Use:
 -- You have to dopath() this script for it to work. I have set a binding
--- MOD1+F12 for a popup-menu. You can also add %rss to the statusbar, which
+-- META+F12 for a popup-menu. You can also add %rss to the statusbar, which
 -- will show a scrolling list of titles. You might want to give it a try
 -- before disabling. :)
 --
@@ -115,7 +115,10 @@ local function parse_rss(str)
     end
     feeds[src] = new
     rss_string = ""
-    table.foreach(feeds, reconstruct_rss)
+    for k,v in pairs(feeds) do
+       reconstruct_rss(k,v)
+    end
+
     rss_length = string.len(rss_string)
     rss_string = rss_string .. string.sub(rss_string, 1, rss_feed.width)
     count = 1
@@ -195,7 +198,7 @@ end
 init_rss()
 
 ioncore.defbindings("WScreen", {
-    kpress(MOD1.."Shift+D", "mod_query.message(_, rss_desc)"),
-    kpress(MOD1.."F12", 'mod_menu.bigmenu(_, _sub, show_menu)'),
+    kpress(META.."Shift+D", "mod_query.message(_, rss_desc)"),
+    kpress(META.."F12", 'mod_menu.bigmenu(_, _sub, show_menu)'),
 })
 
