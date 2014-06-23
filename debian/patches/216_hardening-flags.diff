@@ -4,11 +4,11 @@ Note that lintian still complains some .so's are not fortified, but it looks
 like this is a false positive.
 
 This should eventually make its way in the default build procedure.
-Index: notion/system-autodetect.mk
+Index: notion.xfttest/system-autodetect.mk
 ===================================================================
---- notion.orig/system-autodetect.mk
-+++ notion/system-autodetect.mk
-@@ -150,9 +150,10 @@ CC ?= gcc
+--- notion.xfttest.orig/system-autodetect.mk
++++ notion.xfttest/system-autodetect.mk
+@@ -163,9 +163,10 @@ CC ?= gcc
  WARN=-W -Wall -pedantic 
  
  CFLAGS += -Os $(WARN) $(DEFINES) $(INCLUDES) $(EXTRA_INCLUDES) \
