@@ -1,6 +1,16 @@
-notion (3+2014052800-1~1.gbp33169e) unstable; urgency=medium
+notion (3+2014052800-1xft1~1.gbpc742ad) UNRELEASED; urgency=medium
 
-  ** SNAPSHOT build @33169ef9f76731b8df9398bdacba1f59c4949128 **
+  ** SNAPSHOT build @c742adf20d444d44a36ded8cc88bfcfe3ebbc78a **
+
+  [ Arnout Engelen ]
+  * 'gfind' was renamed to 'gmatch' in lua 5.1
+
+  [ Campbell Barton ]
+  * Add optional XFT support
+
+  [ Arnout Engelen ]
+  * Autodetect availablility of XFT
+  * Use correct fallback font, more font debug logging
 
   * New upstream version
     - 'windows' key is now the default META key
@@ -14,7 +24,7 @@ notion (3+2014052800-1~1.gbp33169e) unstable; urgency=medium
     - Improvement: expose 'warp_pointer' to lua
     - Improvement: lock using i3lock when available
 
- -- Dima Kogan <dima@secretsauce.net>  Tue, 03 Jun 2014 00:54:26 -0700
+ -- Dima Kogan <dima@secretsauce.net>  Mon, 23 Jun 2014 00:58:49 -0700
 
 notion (3+2014010901-1) unstable; urgency=medium
 
